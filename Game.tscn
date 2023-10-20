@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://witm7b2hh5o5"]
+[gd_scene load_steps=43 format=3 uid="uid://witm7b2hh5o5"]
 
 [ext_resource type="ArrayMesh" uid="uid://ciflompehq4iv" path="res://Models/TestKitchen.obj" id="1_8fktu"]
 [ext_resource type="Texture2D" uid="uid://o5ylmurax52v" path="res://Models/texture_1.png" id="2_32di1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="3_jkb65"]
+[ext_resource type="Script" path="res://Scripts/CamWobble.cs" id="3_rvib3"]
 [ext_resource type="Texture2D" uid="uid://4rngdcg0r2j8" path="res://Sprites/AutaTopDownTest.png" id="4_pcuci"]
 [ext_resource type="ArrayMesh" uid="uid://br4edmistph6o" path="res://Models/TestStove.obj" id="5_nj1te"]
 [ext_resource type="Script" path="res://Scripts/StoveInteractable.cs" id="6_xd16q"]
@@ -341,6 +342,9 @@ texture = SubResource("GradientTexture2D_hr4iu")
 
 [node name="StoveCamera" type="Camera3D" parent="Cameras/StoveViewPort"]
 transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 30.95, 1.92, -0.147)
+script = ExtResource("3_rvib3")
+cycleSpd = 1.5
+amp = 0.02
 
 [node name="Areas" type="Node" parent="."]
 
