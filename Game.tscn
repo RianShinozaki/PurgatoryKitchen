@@ -1,0 +1,378 @@
+[gd_scene load_steps=42 format=3 uid="uid://witm7b2hh5o5"]
+
+[ext_resource type="ArrayMesh" uid="uid://ciflompehq4iv" path="res://Models/TestKitchen.obj" id="1_8fktu"]
+[ext_resource type="Texture2D" uid="uid://o5ylmurax52v" path="res://Models/texture_1.png" id="2_32di1"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="3_jkb65"]
+[ext_resource type="Texture2D" uid="uid://4rngdcg0r2j8" path="res://Sprites/AutaTopDownTest.png" id="4_pcuci"]
+[ext_resource type="ArrayMesh" uid="uid://br4edmistph6o" path="res://Models/TestStove.obj" id="5_nj1te"]
+[ext_resource type="Script" path="res://Scripts/StoveInteractable.cs" id="6_xd16q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jr7k5"]
+sky_top_color = Color(0.74902, 0.145098, 0.568627, 1)
+sky_horizon_color = Color(0.647059, 0.654902, 0.670588, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_h02s3"]
+sky_material = SubResource("ProceduralSkyMaterial_jr7k5")
+
+[sub_resource type="Environment" id="Environment_i4ogw"]
+background_mode = 2
+sky = SubResource("Sky_h02s3")
+ambient_light_source = 3
+ambient_light_color = Color(0.67451, 0.545098, 0.933333, 1)
+glow_enabled = true
+glow_intensity = 1.64
+glow_bloom = 0.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfyhg"]
+radius = 0.733592
+height = 1.85281
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xgojo"]
+animation = &"IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pc7oc"]
+animation = &"IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tod7a"]
+animation = &"IdleUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i4gxs"]
+animation = &"IdleDown"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2qy7k"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xgojo")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_pc7oc")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_tod7a")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_i4gxs")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mae22"]
+animation = &"RunLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w4duk"]
+animation = &"RunUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgpf0"]
+animation = &"RunRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7tw50"]
+animation = &"RunDown"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_eo3mp"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_mae22")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_w4duk")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_wgpf0")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_7tw50")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dyyhk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dhpw"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5qlro"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ymvox"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_2qy7k")
+states/Idle/position = Vector2(374, 100)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_eo3mp")
+states/Run/position = Vector2(561, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dyyhk"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_3dhpw"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_5qlro")]
+
+[sub_resource type="Animation" id="Animation_644bj"]
+resource_name = "IdleDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_xxfhk"]
+resource_name = "IdleLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y8et7"]
+resource_name = "IdleRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ehxa6"]
+resource_name = "IdleUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_sj7bh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r07bb"]
+resource_name = "RunDown"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_t8ea1"]
+resource_name = "RunLeft"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 22, 24, 26]
+}
+
+[sub_resource type="Animation" id="Animation_6y1im"]
+resource_name = "RunRight"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 10, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_hqvrw"]
+resource_name = "RunUp"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7u7ca"]
+_data = {
+"IdleDown": SubResource("Animation_644bj"),
+"IdleLeft": SubResource("Animation_xxfhk"),
+"IdleRight": SubResource("Animation_y8et7"),
+"IdleUp": SubResource("Animation_ehxa6"),
+"RESET": SubResource("Animation_sj7bh"),
+"RunDown": SubResource("Animation_r07bb"),
+"RunLeft": SubResource("Animation_t8ea1"),
+"RunRight": SubResource("Animation_6y1im"),
+"RunUp": SubResource("Animation_hqvrw")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kf8vv"]
+viewport_path = NodePath("Cameras/StoveViewPort")
+
+[sub_resource type="Gradient" id="Gradient_tc0rw"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hr4iu"]
+gradient = SubResource("Gradient_tc0rw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hufpc"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_32di1")
+texture_filter = 0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fyxip"]
+data = PackedVector3Array(0, 0.0001, -1, -1, 0, 0.0001, -1, 0.0001, -1, 0, 0, 0.0001, -1, 0, 0.0001, 0, 0.0001, -1, 1, 0.0001, -1, 0, 0, 0.0001, 0, 0.0001, -1, 1, 0, 0.0001, 0, 0, 0.0001, 1, 0.0001, -1, 1, 0, 0.0001, 0, -0.0001, 1, 0, 0, 0.0001, 1, -0.0001, 1, 0, -0.0001, 1, 1, 0, 0.0001, 1, -0.0001, 1, 0, -0.0002, 1.9999, 0, -0.0001, 1, 1, -0.0002, 1.9999, 0, -0.0002, 1.9999, 1, -0.0001, 1, 0, -0.0001, 1, -1, -0.0002, 1.9999, -1, -0.0001, 0.9999, 0, -0.0002, 1.9999, -1, -0.0002, 1.9999, 0, -0.0001, 1, -1, 0, 0.0001, -2, -0.0001, 1, -2, 0, -0.0001, -1, -0.0001, 0.9999, -2, -0.0001, 1, -1, 0, 0.0001, -1, 0.0001, -1, -2, 0, -0.0001, -2, 0.0001, -1, -1, 0, 0.0001, -2, 0, -0.0001, -1, 0.0001, -1, 2, 0.0001, -1, 1, 0, 0.0001, 1, 0.0001, -1, 2, 0, 0.0001, 1, 0, 0.0001, 2, 0.0001, -1, 2, 0, 0.0001, 1, -0.0001, 1, 1, 0, 0.0001, 2, -0.0001, 1, 1, -0.0001, 1, 2, 0, 0.0001, -1, -0.0001, 0.9999, -2, -0.0002, 1.9999, -2, -0.0001, 1, -1, -0.0002, 1.9999, -2, -0.0002, 1.9999, -1, -0.0001, 0.9999, -2, -0.0001, 1, -3, -0.0002, 1.9999, -3, -0.0001, 0.9999, -2, -0.0002, 1.9999, -3, -0.0002, 1.9999, -2, -0.0001, 1, -2, 0, -0.0001, -3, -0.0001, 0.9999, -3, 0, -0.0001, -2, -0.0001, 1, -3, -0.0001, 0.9999, -2, 0, -0.0001, 0, 0, 0.0001, -1, -0.0001, 0.9999, -1, 0, 0.0001, 0, -0.0001, 1, -1, -0.0001, 0.9999, 0, 0, 0.0001, 3, -0.0001, 0.9999, 2, -0.0002, 1.9999, 2, -0.0001, 1, 3, -0.0002, 1.9999, 2, -0.0002, 1.9999, 3, -0.0001, 0.9999, 3, -0.0002, 1.9999, 2, -0.0003, 2.9997, 2, -0.0002, 1.9999, 3, -0.0003, 2.9997, 2, -0.0003, 2.9997, 3, -0.0002, 1.9999, 2, -0.0002, 1.9999, 1, -0.0003, 2.9997, 1, -0.0002, 1.9999, 2, -0.0003, 2.9997, 1, -0.0003, 2.9997, 2, -0.0002, 1.9999, 3, 0, -0.0001, 2, -0.0001, 1, 2, 0, 0.0001, 3, -0.0001, 0.9999, 2, -0.0001, 1, 3, 0, -0.0001, 1, -0.0002, 1.9999, 0, -0.0003, 2.9997, 0, -0.0002, 1.9999, 1, -0.0003, 2.9997, 0, -0.0003, 2.9997, 1, -0.0002, 1.9999, -1, -0.0002, 1.9999, -2, -0.0003, 2.9997, -2, -0.0002, 1.9999, -1, -0.0003, 2.9997, -2, -0.0003, 2.9997, -1, -0.0002, 1.9999, -2, 0.0001, -1, -3, 0, -0.0001, -3, 0.0001, -1, -2, 0, -0.0001, -3, 0, -0.0001, -2, 0.0001, -1, 0, 0.0002, -1.9999, -1, 0.0001, -1, -1, 0.0002, -1.9999, 0, 0.0001, -1, -1, 0.0001, -1, 0, 0.0002, -1.9999, -3, 0.0003, -2.9997, -4, 0.0002, -1.9999, -4, 0.0003, -2.9997, -3, 0.0002, -1.9999, -4, 0.0002, -1.9999, -3, 0.0003, -2.9997, 4, 0.0003, -2.9997, 3, 0.0002, -1.9999, 3, 0.0003, -2.9997, 4, 0.0002, -1.9999, 3, 0.0002, -1.9999, 4, 0.0003, -2.9997, 4, 0, -0.0001, 3, -0.0001, 0.9999, 3, 0, -0.0001, 4, -0.0001, 1, 3, -0.0001, 0.9999, 4, 0, -0.0001, 0, -0.0002, 1.9999, -1, -0.0003, 2.9997, -1, -0.0002, 1.9999, 0, -0.0003, 2.9997, -1, -0.0003, 2.9997, 0, -0.0002, 1.9999, 1, 0.0002, -1.9999, 0, 0.0001, -1, 0, 0.0002, -1.9999, 1, 0.0001, -1, 0, 0.0001, -1, 1, 0.0002, -1.9999, 3, 0.0002, -1.9999, 2, 0.0001, -1, 2, 0.0002, -1.9999, 3, 0.0001, -1, 2, 0.0001, -1, 3, 0.0002, -1.9999, 1, 0.0003, -2.9997, 0, 0.0002, -1.9999, 0, 0.0003, -2.9997, 1, 0.0002, -1.9999, 0, 0.0002, -1.9999, 1, 0.0003, -2.9997, 2, -0.0001, 1, 1, -0.0002, 1.9999, 1, -0.0001, 1, 2, -0.0002, 1.9999, 1, -0.0002, 1.9999, 2, -0.0001, 1, -1, 0.0002, -1.9999, -2, 0.0001, -1, -2, 0.0002, -1.9999, -1, 0.0001, -1, -2, 0.0001, -1, -1, 0.0002, -1.9999, -2, 0.0002, -1.9999, -3, 0.0001, -1, -3, 0.0002, -1.9999, -2, 0.0001, -1, -3, 0.0001, -1, -2, 0.0002, -1.9999, -2, -0.0002, 1.9999, -3, -0.0003, 2.9997, -3, -0.0002, 1.9999, -2, -0.0003, 2.9997, -3, -0.0003, 2.9997, -2, -0.0002, 1.9999, 4, -0.0001, 1, 3, -0.0002, 1.9999, 3, -0.0001, 0.9999, 4, -0.0002, 1.9999, 3, -0.0002, 1.9999, 4, -0.0001, 1, 4, -0.0002, 1.9999, 3, -0.0003, 2.9997, 3, -0.0002, 1.9999, 4, -0.0003, 2.9997, 3, -0.0003, 2.9997, 4, -0.0002, 1.9999, 4, 0.0002, -1.9999, 3, 0.0001, -1, 3, 0.0002, -1.9999, 4, 0.0001, -1, 3, 0.0001, -1, 4, 0.0002, -1.9999, -3, -0.0002, 1.9999, -4, -0.0003, 2.9997, -4, -0.0002, 1.9998, -3, -0.0003, 2.9997, -4, -0.0003, 2.9997, -3, -0.0002, 1.9999, -3, -0.0001, 0.9999, -4, -0.0002, 1.9998, -4, -0.0001, 0.9999, -3, -0.0002, 1.9999, -4, -0.0002, 1.9998, -3, -0.0001, 0.9999, -3, 0, -0.0001, -4, -0.0001, 0.9999, -4, 0, -0.0001, -3, -0.0001, 0.9999, -4, -0.0001, 0.9999, -3, 0, -0.0001, -3, 0.0001, -1, -4, 0, -0.0001, -4, 0.0001, -1, -3, 0, -0.0001, -4, 0, -0.0001, -3, 0.0001, -1, -3, 0.0002, -1.9999, -4, 0.0001, -1, -4, 0.0002, -1.9999, -3, 0.0001, -1, -4, 0.0001, -1, -3, 0.0002, -1.9999, -2, 0.0003, -2.9997, -3, 0.0002, -1.9999, -3, 0.0003, -2.9997, -2, 0.0002, -1.9999, -3, 0.0002, -1.9999, -2, 0.0003, -2.9997, -1, 0.0003, -2.9997, -2, 0.0002, -1.9999, -2, 0.0003, -2.9997, -1, 0.0002, -1.9999, -2, 0.0002, -1.9999, -1, 0.0003, -2.9997, 0, 0.0003, -2.9997, -1, 0.0002, -1.9999, -1, 0.0003, -2.9997, 0, 0.0002, -1.9999, -1, 0.0002, -1.9999, 0, 0.0003, -2.9997, 2, 0.0003, -2.9997, 1, 0.0002, -1.9999, 1, 0.0003, -2.9997, 2, 0.0002, -1.9999, 1, 0.0002, -1.9999, 2, 0.0003, -2.9997, 3, 0.0003, -2.9997, 2, 0.0002, -1.9999, 2, 0.0003, -2.9997, 3, 0.0002, -1.9999, 2, 0.0002, -1.9999, 3, 0.0003, -2.9997, 2, 0.0002, -1.9999, 1, 0.0001, -1, 1, 0.0002, -1.9999, 2, 0.0001, -1, 1, 0.0001, -1, 2, 0.0002, -1.9999, 3, 0.0001, -1, 2, 0, 0.0001, 2, 0.0001, -1, 3, 0, -0.0001, 2, 0, 0.0001, 3, 0.0001, -1, 4, 0.0001, -1, 3, 0, -0.0001, 3, 0.0001, -1, 4, 0, -0.0001, 3, 0, -0.0001, 4, 0.0001, -1, 5, 0.0003, -2.9997, 4, 0.0002, -1.9999, 4, 0.0003, -2.9997, 5, 0.0002, -1.9998, 4, 0.0002, -1.9999, 5, 0.0003, -2.9997, 5, 0.0002, -1.9998, 4, 0.0001, -1, 4, 0.0002, -1.9999, 5, 0.0001, -0.9999, 4, 0.0001, -1, 5, 0.0002, -1.9998, 5, 0.0001, -0.9999, 4, 0, -0.0001, 4, 0.0001, -1, 5, 0, 0.0001, 4, 0, -0.0001, 5, 0.0001, -0.9999, 5, -0.0001, 0.9999, 4, -0.0002, 1.9999, 4, -0.0001, 1, 5, -0.0002, 1.9999, 4, -0.0002, 1.9999, 5, -0.0001, 0.9999, 5, -0.0002, 1.9999, 4, -0.0003, 2.9997, 4, -0.0002, 1.9999, 5, -0.0003, 2.9997, 4, -0.0003, 2.9997, 5, -0.0002, 1.9999, 5, -0.0003, 2.9997, 4, -0.0004, 3.9997, 4, -0.0003, 2.9997, 5, -0.0004, 3.9997, 4, -0.0004, 3.9997, 5, -0.0003, 2.9997, 4, -0.0003, 2.9997, 3, -0.0004, 3.9997, 3, -0.0003, 2.9997, 4, -0.0004, 3.9997, 3, -0.0004, 3.9997, 4, -0.0003, 2.9997, 3, -0.0003, 2.9997, 2, -0.0004, 3.9997, 2, -0.0003, 2.9997, 3, -0.0004, 3.9997, 2, -0.0004, 3.9997, 3, -0.0003, 2.9997, 2, -0.0003, 2.9997, 1, -0.0004, 3.9997, 1, -0.0003, 2.9997, 2, -0.0004, 3.9997, 1, -0.0004, 3.9997, 2, -0.0003, 2.9997, 1, -0.0003, 2.9997, 0, -0.0004, 3.9997, 0, -0.0003, 2.9997, 1, -0.0004, 3.9997, 0, -0.0004, 3.9997, 1, -0.0003, 2.9997, 0, -0.0003, 2.9997, -1, -0.0004, 3.9997, -1, -0.0003, 2.9997, 0, -0.0004, 3.9997, -1, -0.0004, 3.9997, 0, -0.0003, 2.9997, -1, -0.0003, 2.9997, -2, -0.0004, 3.9997, -2, -0.0003, 2.9997, -1, -0.0004, 3.9997, -2, -0.0004, 3.9997, -1, -0.0003, 2.9997, -2, -0.0003, 2.9997, -3, -0.0004, 3.9997, -3, -0.0003, 2.9997, -2, -0.0004, 3.9997, -3, -0.0004, 3.9997, -2, -0.0003, 2.9997, -3, -0.0003, 2.9997, -4, -0.0004, 3.9997, -4, -0.0003, 2.9997, -3, -0.0004, 3.9997, -4, -0.0004, 3.9997, -3, -0.0003, 2.9997, -4, -0.0002, 1.9998, -5, -0.0003, 2.9997, -5, -0.0002, 1.9998, -4, -0.0003, 2.9997, -5, -0.0003, 2.9997, -4, -0.0002, 1.9998, -4, -0.0001, 0.9999, -5, -0.0002, 1.9998, -5, -0.0001, 0.9999, -4, -0.0002, 1.9998, -5, -0.0002, 1.9998, -4, -0.0001, 0.9999, -4, 0, -0.0001, -5, -0.0001, 0.9999, -5, 0, -0.0001, -4, -0.0001, 0.9999, -5, -0.0001, 0.9999, -4, 0, -0.0001, -4, 0.0002, -1.9999, -5, 0.0001, -0.9999, -5, 0.0002, -1.9999, -4, 0.0001, -1, -5, 0.0001, -0.9999, -4, 0.0002, -1.9999, -4, 0.0003, -2.9997, -5, 0.0002, -1.9999, -5, 0.0003, -2.9997, -4, 0.0002, -1.9999, -5, 0.0002, -1.9999, -4, 0.0003, -2.9997, -4, 0.0001, -1, -5, 0, -0.0001, -5, 0.0001, -0.9999, -4, 0, -0.0001, -5, 0, -0.0001, -4, 0.0001, -1, -4, -0.0003, 2.9997, -5, -0.0004, 3.9997, -5, -0.0003, 2.9997, -4, -0.0004, 3.9997, -5, -0.0004, 3.9997, -4, -0.0003, 2.9997, 5, 0, 0.0001, 4, -0.0001, 1, 4, 0, -0.0001, 5, -0.0001, 0.9999, 4, -0.0001, 1, 5, 0, 0.0001, 1, 1, -3, 0, 0.0003, -2.9997, 0, 1, -3, 1, 0.0003, -2.9997, 0, 0.0003, -2.9997, 1, 1, -3, 0, 1, -3, -1, 0.0003, -2.9997, -1, 1, -3, 0, 0.0003, -2.9997, -1, 0.0003, -2.9997, 0, 1, -3, -1, 1, -3, -2, 0.0003, -2.9997, -2, 1, -3, -1, 0.0003, -2.9997, -2, 0.0003, -2.9997, -1, 1, -3, -2, 1, -3, -3, 0.0003, -2.9997, -3, 1, -3, -2, 0.0003, -2.9997, -3, 0.0003, -2.9997, -2, 1, -3, -3, 1, -3, -4, 0.0003, -2.9997, -4, 1, -3, -3, 0.0003, -2.9997, -4, 0.0003, -2.9997, -3, 1, -3, -4, 1, -3, -5, 0.0003, -2.9997, -5, 1, -3, -4, 0.0003, -2.9997, -5, 0.0003, -2.9997, -4, 1, -3, -4, 2, -3, -5, 1, -3, -5, 2, -3, -4, 1, -3, -5, 1, -3, -4, 2, -3, -3, 2, -3, -4, 1, -3, -4, 2, -3, -3, 1, -3, -4, 1, -3, -3, 2, -3, -1, 2, -3, -2, 1, -3, -2, 2, -3, -1, 1, -3, -2, 1, -3, -1, 2, -3, 0, 2, -3, -1, 1, -3, -1, 2, -3, 0, 1, -3, -1, 1, -3, 0, 2, -3, 1, 2, -3, 0, 1, -3, 0, 2, -3, 1, 1, -3, 0, 1, -3, 1, 2, -3, 2, 2, -3, 1, 1, -3, 1, 2, -3, 2, 1, -3, 1, 1, -3, 2, 2, -3, 3, 2, -3, 2, 1, -3, 2, 2, -3, 3, 1, -3, 2, 1, -3, 3, 2, -3, 4, 2, -3, 3, 1, -3, 3, 2, -3, 4, 1, -3, 3, 1, -3, 4, 2, -3, 5, 1, -3, 4, 0.0003, -2.9997, 4, 1, -3, 5, 0.0003, -2.9997, 4, 0.0003, -2.9997, 5, 1, -3, 4, 1, -3, 3, 0.0003, -2.9997, 3, 1, -3, 4, 0.0003, -2.9997, 3, 0.0003, -2.9997, 4, 1, -3, 3, 1, -3, 2, 0.0003, -2.9997, 2, 1, -3, 3, 0.0003, -2.9997, 2, 0.0003, -2.9997, 3, 1, -3, 2, 1, -3, 1, 0.0003, -2.9997, 1, 1, -3, 2, 0.0003, -2.9997, 1, 0.0003, -2.9997, 2, 1, -3, -2, 2, -3, -3, 1, -3, -3, 2, -3, -2, 1, -3, -3, 1, -3, -2, 2, -3, 5, 2, -3, 4, 1, -3, 4, 2, -3, 5, 1, -3, 4, 1, -3, 5, 2, -3, 5, 3, -3, 4, 2, -3, 4, 3, -3, 5, 2, -3, 4, 2, -3, 5, 3, -3, 4, 3, -3, 3, 2, -3, 3, 3, -3, 4, 2, -3, 3, 2, -3, 4, 3, -3, 3, 3, -3, 2, 2, -3, 2, 3, -3, 3, 2, -3, 2, 2, -3, 3, 3, -3, 2, 3, -3, 1, 2, -3, 1, 3, -3, 2, 2, -3, 1, 2, -3, 2, 3, -3, 1, 3, -3, 0, 2, -3, 0, 3, -3, 1, 2, -3, 0, 2, -3, 1, 3, -3, 0, 3, -3, -1, 2, -3, -1, 3, -3, 0, 2, -3, -1, 2, -3, 0, 3, -3, -1, 3, -3, -2, 2, -3, -2, 3, -3, -1, 2, -3, -2, 2, -3, -1, 3, -3, -2, 3, -3, -3, 2, -3, -3, 3, -3, -2, 2, -3, -3, 2, -3, -2, 3, -3, -3, 3, -3, -4, 2, -3, -4, 3, -3, -3, 2, -3, -4, 2, -3, -3, 3, -3, -4, 3, -3, -5, 2, -3, -5, 3, -3, -4, 2, -3, -5, 2, -3, -4, 3, -3, -3, 4, -3, -4, 3, -3, -4, 4, -3, -3, 3, -3, -4, 3, -3, -3, 4, -3, -2, 4, -3, -3, 3, -3, -3, 4, -3, -2, 3, -3, -3, 3, -3, -2, 4, -3, -1, 4, -3, -2, 3, -3, -2, 4, -3, -1, 3, -3, -2, 3, -3, -1, 4, -3, 0, 4, -3, -1, 3, -3, -1, 4, -3, 0, 3, -3, -1, 3, -3, 0, 4, -3, 1, 4, -3, 0, 3, -3, 0, 4, -3, 1, 3, -3, 0, 3, -3, 1, 4, -3, 2, 4, -3, 1, 3, -3, 1, 4, -3, 2, 3, -3, 1, 3, -3, 2, 4, -3, 3, 4, -3, 2, 3, -3, 2, 4, -3, 3, 3, -3, 2, 3, -3, 3, 4, -3, 4, 4, -3, 3, 3, -3, 3, 4, -3, 4, 3, -3, 3, 3, -3, 4, 4, -3, 5, 4, -3, 4, 3, -3, 4, 4, -3, 5, 3, -3, 4, 3, -3, 5, 4, -3, -4, 4, -3, -5, 3, -3, -5, 4, -3, -4, 3, -3, -5, 3, -3, -4, 4, -3, -4, 4.0001, -4, -5, 4, -3, -5, 4.0001, -4, -4, 4, -3, -5, 4, -3, -4, 4.0001, -4, -3, 4.0001, -4, -4, 4, -3, -4, 4.0001, -4, -3, 4, -3, -4, 4, -3, -3, 4.0001, -4, -2, 4.0001, -4, -3, 4, -3, -3, 4.0001, -4, -2, 4, -3, -3, 4, -3, -2, 4.0001, -4, -1, 4.0001, -4, -2, 4, -3, -2, 4.0001, -4, -1, 4, -3, -2, 4, -3, -1, 4.0001, -4, 0, 4.0001, -4, -1, 4, -3, -1, 4.0001, -4, 0, 4, -3, -1, 4, -3, 0, 4.0001, -4, 1, 4.0001, -4, 0, 4, -3, 0, 4.0001, -4, 1, 4, -3, 0, 4, -3, 1, 4.0001, -4, 2, 4.0001, -4, 1, 4, -3, 1, 4.0001, -4, 2, 4, -3, 1, 4, -3, 2, 4.0001, -4, 3, 4.0001, -4, 2, 4, -3, 2, 4.0001, -4, 3, 4, -3, 2, 4, -3, 3, 4.0001, -4, 4, 4.0001, -4, 3, 4, -3, 3, 4.0001, -4, 4, 4, -3, 3, 4, -3, 4, 4.0001, -4, 5, 4.0001, -4, 4, 4, -3, 4, 4.0001, -4, 5, 4, -3, 4, 4, -3, 5, 4.0001, -4, 5, 1, -2, 5, 0.0003, -2.9997, 5, 1, -3, 5, 0.0002, -1.9998, 5, 0.0003, -2.9997, 5, 1, -2, 5, 2, -2, 5, 1, -3, 5, 2, -3, 5, 1, -2, 5, 1, -3, 5, 2, -2, 5, 3, -2, 5, 2, -3, 5, 3, -3, 5, 2, -2, 5, 2, -3, 5, 3, -2, 5, 4, -2, 5, 3, -3, 5, 4, -3, 5, 3, -2, 5, 3, -3, 5, 4, -2, 5, 4, -1, 5, 3, -2, 5, 4, -2, 5, 3, -1, 5, 3, -2, 5, 4, -1, 5, 3, -1, 5, 2, -2, 5, 3, -2, 5, 2, -1, 5, 2, -2, 5, 3, -1, 5, 2, -1, 5, 1, -2, 5, 2, -2, 5, 1, -1, 5, 1, -2, 5, 2, -1, 5, 1, -1, 5, 0.0002, -1.9998, 5, 1, -2, 5, 0.0001, -0.9999, 5, 0.0002, -1.9998, 5, 1, -1, 5, 2, 0, 5, 1, -1, 5, 2, -1, 5, 1, 0, 5, 1, -1, 5, 2, 0, 5, 4, 0, 5, 3, -1, 5, 4, -1, 5, 3, 0, 5, 3, -1, 5, 4, 0, 5, 4, 1, 5, 3, 0, 5, 4, 0, 5, 3, 1, 5, 3, 0, 5, 4, 1, 5, 3, 1, 5, 2, 0, 5, 3, 0, 5, 2, 1, 5, 2, 0, 5, 3, 1, 5, 2, 1, 5, 1, 0, 5, 2, 0, 5, 1, 1, 5, 1, 0, 5, 2, 1, 5, 3, 0, 5, 2, -1, 5, 3, -1, 5, 2, 0, 5, 2, -1, 5, 3, 0, 5, 2, 2, 5, 1, 1, 5, 2, 1, 5, 1, 2, 5, 1, 1, 5, 2, 2, 5, 1, 2, 5, -0.0001, 0.9999, 5, 1, 1, 5, -0.0002, 1.9999, 5, -0.0001, 0.9999, 5, 1, 2, 5, 1, 1, 5, 0, 0.0001, 5, 1, 0, 5, -0.0001, 0.9999, 5, 0, 0.0001, 5, 1, 1, 5, 1, 0, 5, 0.0001, -0.9999, 5, 1, -1, 5, 0, 0.0001, 5, 0.0001, -0.9999, 5, 1, 0, 5, 3, 2, 5, 2, 1, 5, 3, 1, 5, 2, 2, 5, 2, 1, 5, 3, 2, 5, 3, 3, 5, 2, 2, 5, 3, 2, 5, 2, 3, 5, 2, 2, 5, 3, 3, 5, 2, 3, 5, 1, 2, 5, 2, 2, 5, 1, 3, 5, 1, 2, 5, 2, 3, 5, 4, 2, 5, 3, 1, 5, 4, 1, 5, 3, 2, 5, 3, 1, 5, 4, 2, 5, 4, 3, 5, 3, 2, 5, 4, 2, 5, 3, 3, 5, 3, 2, 5, 4, 3, 5, 4, 4, 5, 3, 3, 5, 4, 3, 5, 3, 4, 5, 3, 3, 5, 4, 4, 5, 3, 4, 5, 2, 3, 5, 3, 3, 5, 2, 4, 5, 2, 3, 5, 3, 4, 5, 2, 4, 5, 1, 3, 5, 2, 3, 5, 1, 4, 5, 1, 3, 5, 2, 4, 5, 1, 4, 5, -0.0003, 2.9997, 5, 1, 3, 5, -0.0004, 3.9997, 5, -0.0003, 2.9997, 5, 1, 4, 5, 1, 3, 5, -0.0002, 1.9999, 5, 1, 2, 5, -0.0003, 2.9997, 5, -0.0002, 1.9999, 5, 1, 3, -5, 1, -3, -5, 0.0002, -1.9999, -5, 1, -2, -5, 0.0003, -2.9997, -5, 0.0002, -1.9999, -5, 1, -3, -5, 2, -3, -5, 1, -2, -5, 2, -2, -5, 1, -3, -5, 1, -2, -5, 2, -3, -5, 3, -3, -5, 2, -2, -5, 3, -2, -5, 2, -3, -5, 2, -2, -5, 3, -3, -5, 4, -3, -5, 3, -2, -5, 4, -2, -5, 3, -3, -5, 3, -2, -5, 4, -3, -5, 4, -2, -5, 3, -1, -5, 4, -1, -5, 3, -2, -5, 3, -1, -5, 4, -2, -5, 4, -1, -5, 3, 0, -5, 4, 0, -5, 3, -1, -5, 3, 0, -5, 4, -1, -5, 4, 0, -5, 3, 1, -5, 4, 1, -5, 3, 0, -5, 3, 1, -5, 4, 0, -5, 4, 1, -5, 3, 2, -5, 4, 2, -5, 3, 1, -5, 3, 2, -5, 4, 1, -5, 4, 2, -5, 3, 3, -5, 4, 3, -5, 3, 2, -5, 3, 3, -5, 4, 2, -5, 3, 3, -5, 2, 4, -5, 3, 4, -5, 2, 3, -5, 2, 4, -5, 3, 3, -5, 2, 3, -5, 1, 4, -5, 2, 4, -5, 1, 3, -5, 1, 4, -5, 2, 3, -5, 1, 3, -5, -0.0004, 3.9997, -5, 1, 4, -5, -0.0003, 2.9997, -5, -0.0004, 3.9997, -5, 1, 3, -5, 1, 2, -5, -0.0003, 2.9997, -5, 1, 3, -5, -0.0002, 1.9998, -5, -0.0003, 2.9997, -5, 1, 2, -5, 1, 1, -5, -0.0002, 1.9998, -5, 1, 2, -5, -0.0001, 0.9999, -5, -0.0002, 1.9998, -5, 1, 1, -5, 2, 1, -5, 1, 2, -5, 2, 2, -5, 1, 1, -5, 1, 2, -5, 2, 1, -5, 3, 2, -5, 2, 3, -5, 3, 3, -5, 2, 2, -5, 2, 3, -5, 3, 2, -5, 4, 3, -5, 3, 4, -5, 4, 4, -5, 3, 3, -5, 3, 4, -5, 4, 3, -5, 2, 2, -5, 1, 3, -5, 2, 3, -5, 1, 2, -5, 1, 3, -5, 2, 2, -5, 2, 0, -5, 1, 1, -5, 2, 1, -5, 1, 0, -5, 1, 1, -5, 2, 0, -5, 2, -1, -5, 1, 0, -5, 2, 0, -5, 1, -1, -5, 1, 0, -5, 2, -1, -5, 1, -1, -5, 0, -0.0001, -5, 1, 0, -5, 0.0001, -0.9999, -5, 0, -0.0001, -5, 1, -1, -5, 1, 0, -5, -0.0001, 0.9999, -5, 1, 1, -5, 0, -0.0001, -5, -0.0001, 0.9999, -5, 1, 0, -5, 3, 0, -5, 2, 1, -5, 3, 1, -5, 2, 0, -5, 2, 1, -5, 3, 0, -5, 3, -1, -5, 2, 0, -5, 3, 0, -5, 2, -1, -5, 2, 0, -5, 3, -1, -5, 2, -2, -5, 1, -1, -5, 2, -1, -5, 1, -2, -5, 1, -1, -5, 2, -2, -5, 3, 1, -5, 2, 2, -5, 3, 2, -5, 2, 1, -5, 2, 2, -5, 3, 1, -5, 1, -2, -5, 0.0001, -0.9999, -5, 1, -1, -5, 0.0002, -1.9999, -5, 0.0001, -0.9999, -5, 1, -2, -5, 3, -2, -5, 2, -1, -5, 3, -1, -5, 2, -2, -5, 2, -1, -5, 3, -2, -5, 4, 3, -6, 3.9993, 3.9994, -6, 3.9994, 2.9994, -5, 4, 4, -6, 3.9993, 3.9994, -5, 4, 3, -5, 4, 2, -6, 3.9994, 2.9994, -6, 3.9995, 1.9995, -5, 4, 3, -6, 3.9994, 2.9994, -5, 4, 2, -5, 4, 1, -6, 3.9995, 1.9995, -6, 3.9996, 0.9996, -5, 4, 2, -6, 3.9995, 1.9995, -5, 4, 1, -5, 4, 0, -6, 3.9996, 0.9996, -6, 3.9997, -0.0004, -5, 4, 1, -6, 3.9996, 0.9996, -5, 4, 0, -5, 4, -1, -6, 3.9997, -0.0004, -6, 3.9998, -1.0003, -5, 4, 0, -6, 3.9997, -0.0004, -5, 4, -1, -5, 4, -2, -6, 3.9998, -1.0003, -6, 3.9999, -2.0002, -5, 4, -1, -6, 3.9998, -1.0003, -5, 4, -2, -5, 4, -3, -6, 3.9999, -2.0002, -6, 4, -3.0001, -5, 4, -2, -6, 3.9999, -2.0002, -5, 4, -3, -5, 4.0001, -4, -6, 4, -3.0001, -6, 4.0001, -4, -5, 4, -3, -6, 4, -3.0001, -5, 4.0001, -4, 6, 4.0001, -4, 5, 4, -3, 5, 4.0001, -4, 6, 4, -3, 5, 4, -3, 6, 4.0001, -4, 6, 4, -3, 5, 4, -2, 5, 4, -3, 6, 3.9999, -2.0001, 5, 4, -2, 6, 4, -3, 6, 3.9999, -2.0001, 5, 4, -1, 5, 4, -2, 6, 3.9998, -1.0001, 5, 4, -1, 6, 3.9999, -2.0001, 6, 3.9998, -1.0001, 5, 4, 0, 5, 4, -1, 6, 3.9997, -0.0003, 5, 4, 0, 6, 3.9998, -1.0001, 6, 3.9997, -0.0003, 5, 4, 1, 5, 4, 0, 6, 3.9996, 0.9997, 5, 4, 1, 6, 3.9997, -0.0003, 6, 3.9996, 0.9997, 5, 4, 2, 5, 4, 1, 6, 3.9995, 1.9996, 5, 4, 2, 6, 3.9996, 0.9997, 6, 3.9995, 1.9996, 5, 4, 3, 5, 4, 2, 6, 3.9994, 2.9995, 5, 4, 3, 6, 3.9995, 1.9996, 6, 3.9994, 2.9995, 5, 4, 4, 5, 4, 3, 6, 3.9993, 3.9994, 5, 4, 4, 6, 3.9994, 2.9995, -2, 1, -2, -5, 0.0002, -1.9999, -5, 1, -2, -2, 0.0002, -1.9999, -5, 0.0002, -1.9999, -2, 1, -2, 1, 1, -3, 1, 0.0002, -1.9999, 1, 1, -2, 1, 0.0003, -2.9997, 1, 0.0002, -1.9999, 1, 1, -3, 3, 1, -2, 2, 0.0002, -1.9999, 2, 1, -2, 3, 0.0002, -1.9999, 2, 0.0002, -1.9999, 3, 1, -2, 4, 1, -2, 3, 0.0002, -1.9999, 3, 1, -2, 4, 0.0002, -1.9999, 3, 0.0002, -1.9999, 4, 1, -2, 3, 2, -2, 2, 1, -2, 2, 2, -2, 3, 1, -2, 2, 1, -2, 3, 2, -2, 4, 2, -2, 3, 1, -2, 3, 2, -2, 4, 1, -2, 3, 1, -2, 4, 2, -2, 3, 2, -3, 2, 2, -2, 2, 2, -3, 3, 2, -2, 2, 2, -2, 3, 2, -3, 4, 2, -3, 3, 2, -2, 3, 2, -3, 4, 2, -2, 3, 2, -2, 4, 2, -3, 2, 2, -2, 2, 1, -3, 2, 2, -3, 2, 1, -2, 2, 1, -3, 2, 2, -2, 2, 1, -2, 2, 0.0003, -2.9997, 2, 1, -3, 2, 0.0002, -1.9999, 2, 0.0003, -2.9997, 2, 1, -2, 4, 1, -3, 4, 0.0002, -1.9999, 4, 1, -2, 4, 0.0003, -2.9997, 4, 0.0002, -1.9999, 4, 1, -3, 4, 2, -3, 4, 1, -2, 4, 2, -2, 4, 1, -3, 4, 1, -2, 4, 2, -3, 1, 1, -3, 0, 1, -2, 0, 1, -3, 1, 1, -2, 0, 1, -2, 1, 1, -3, 0, 1, -3, -1, 1, -2, -1, 1, -3, 0, 1, -2, -1, 1, -2, 0, 1, -3, -1, 1, -3, -2, 1, -2, -2, 1, -3, -1, 1, -2, -2, 1, -2, -1, 1, -3, -2, 1, -3, -3, 1, -2, -3, 1, -3, -2, 1, -2, -3, 1, -2, -2, 1, -3, -3, 1, -3, -4, 1, -2, -4, 1, -3, -3, 1, -2, -4, 1, -2, -3, 1, -3, -4, 1, -3, -5, 1, -2, -5, 1, -3, -4, 1, -2, -5, 1, -2, -4, 1, -3, -4, 0.9997, 0.9997, -4, -0.0002, 1.9998, -4, 1, 2, -4, -0.0001, 0.9999, -4, -0.0002, 1.9998, -4, 0.9997, 0.9997, 0, 1, -2, -1, 0.0002, -1.9999, -1, 1, -2, 0, 0.0002, -1.9999, -1, 0.0002, -1.9999, 0, 1, -2, -4, 0.9999, -1.0001, -5, 1, 0, -5, 1, -1, -4, 0.9998, -0.0002, -5, 1, 0, -4, 0.9999, -1.0001, -4, 1, 2, -5, 1, 3, -5, 1, 2, -4, 0.9995, 2.9995, -5, 1, 3, -4, 1, 2, -4, 0.9997, 0.9997, -5, 1, 2, -5, 1, 1, -4, 1, 2, -5, 1, 2, -4, 0.9997, 0.9997, -4, 0.9998, -0.0002, -5, 1, 1, -5, 1, 0, -4, 0.9997, 0.9997, -5, 1, 1, -4, 0.9998, -0.0002, -4, 1, 2, -4, -0.0003, 2.9997, -4, 0.9995, 2.9995, -4, -0.0002, 1.9998, -4, -0.0003, 2.9997, -4, 1, 2, -4, 0.9999, -1.0001, -4, 0, -0.0001, -4, 0.9998, -0.0002, -4, 0.0001, -1, -4, 0, -0.0001, -4, 0.9999, -1.0001, -4, 0.9998, -0.0002, -4, -0.0001, 0.9999, -4, 0.9997, 0.9997, -4, 0, -0.0001, -4, -0.0001, 0.9999, -4, 0.9998, -0.0002, -1, 1, -2, -2, 0.0002, -1.9999, -2, 1, -2, -1, 0.0002, -1.9999, -2, 0.0002, -1.9999, -1, 1, -2, -4, 0.9995, 2.9995, -5, -0.0003, 2.9997, -5, 1, 3, -4, -0.0003, 2.9997, -5, -0.0003, 2.9997, -4, 0.9995, 2.9995, 1, 1, -2, 0, 0.0002, -1.9999, 0, 1, -2, 1, 0.0002, -1.9999, 0, 0.0002, -1.9999, 1, 1, -2, 5, -0.0004, 3.9997, 4, -1, 4, 4, -0.0004, 3.9997, 5, -1, 4, 4, -1, 4, 5, -0.0004, 3.9997, 4, -0.0004, 3.9997, 3, -1, 4, 3, -0.0004, 3.9997, 4, -1, 4, 3, -1, 4, 4, -0.0004, 3.9997, 3, -0.0004, 3.9997, 2, -1, 4, 2, -0.0004, 3.9997, 3, -1, 4, 2, -1, 4, 3, -0.0004, 3.9997, 2, -0.0004, 3.9997, 1, -1, 4, 1, -0.0004, 3.9997, 2, -1, 4, 1, -1, 4, 2, -0.0004, 3.9997, 1, -0.0004, 3.9997, 0, -1, 4, 0, -0.0004, 3.9997, 1, -1, 4, 0, -1, 4, 1, -0.0004, 3.9997, 0, -0.0004, 3.9997, -1, -1, 4, -1, -0.0004, 3.9997, 0, -1, 4, -1, -1, 4, 0, -0.0004, 3.9997, -1, -0.0004, 3.9997, -2, -1, 4, -2, -0.0004, 3.9997, -1, -1, 4, -2, -1, 4, -1, -0.0004, 3.9997, -2, -0.0004, 3.9997, -3, -1, 4, -3, -0.0004, 3.9997, -2, -1, 4, -3, -1, 4, -2, -0.0004, 3.9997, -3, -0.0004, 3.9997, -4, -1, 4, -4, -0.0004, 3.9997, -3, -1, 4, -4, -1, 4, -3, -0.0004, 3.9997, -4, -0.0004, 3.9997, -5, -1, 4, -5, -0.0004, 3.9997, -4, -1, 4, -5, -1, 4, -4, -0.0004, 3.9997, 6, 0, 4, 5, -1, 4, 5, -0.0004, 3.9997, 6, -1, 4, 5, -1, 4, 6, 0, 4, -5, -0.0004, 3.9997, -6, -1, 4, -6, 0, 4, -5, -1, 4, -6, -1, 4, -5, -0.0004, 3.9997, 6, 1, 4, 5, -0.0004, 3.9997, 5, 1, 4, 6, 0, 4, 5, -0.0004, 3.9997, 6, 1, 4, 6, 2, 4, 5, 1, 4, 5, 2, 4, 6, 1, 4, 5, 1, 4, 6, 2, 4, 6, 3, 4, 5, 2, 4, 5, 3, 4, 6, 2, 4, 5, 2, 4, 6, 3, 4, 6, 3.9993, 3.9994, 5, 3, 4, 5, 4, 4, 6, 3, 4, 5, 3, 4, 6, 3.9993, 3.9994, -5, 4, 4, -6, 3, 4, -6, 3.9993, 3.9994, -5, 3, 4, -6, 3, 4, -5, 4, 4, -5, 3, 4, -6, 2, 4, -6, 3, 4, -5, 2, 4, -6, 2, 4, -5, 3, 4, -5, 2, 4, -6, 1, 4, -6, 2, 4, -5, 1, 4, -6, 1, 4, -5, 2, 4, -5, 1, 4, -6, 0, 4, -6, 1, 4, -5, 0, 4, -6, 0, 4, -5, 1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3cyc5"]
+albedo_texture = ExtResource("2_32di1")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6enhr"]
+size = Vector3(2.28684, 3.49832, 1.61408)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i4ogw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0801989, 0.996779, 0, -0.996779, 0.0801989, 0, 4.51299, 0)
+light_color = Color(0.847059, 0.709804, 0.870588, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.17539)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_jkb65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pfyhg")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478396, 0)
+offset = Vector2(0, 12.865)
+pixel_size = 0.0625
+billboard = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("4_pcuci")
+hframes = 6
+vframes = 5
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D"]
+tree_root = SubResource("AnimationNodeStateMachine_ymvox")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/idle = false
+parameters/conditions/running = false
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Run/blend_position = Vector2(0.67, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_7u7ca")
+}
+
+[node name="Cameras" type="Node" parent="."]
+
+[node name="MainCamera" type="Camera3D" parent="Cameras"]
+transform = Transform3D(1, 0, 0, 0, 0.824126, 0.566406, 0, -0.566406, 0.824126, 0, 12.39, 14.635)
+fov = 25.8
+
+[node name="StoveScene" type="Sprite3D" parent="Cameras/MainCamera"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -4.76837e-07, -3.12)
+visible = false
+texture = SubResource("ViewportTexture_kf8vv")
+
+[node name="Frame" type="Sprite3D" parent="Cameras/MainCamera/StoveScene"]
+transform = Transform3D(8.28, 0, 0, 0, 8.28, 0, 0, 0, 8.28, 0, 0, -0.1)
+texture = SubResource("GradientTexture2D_hr4iu")
+
+[node name="StoveViewPort" type="SubViewport" parent="Cameras"]
+
+[node name="StoveCamera" type="Camera3D" parent="Cameras/StoveViewPort"]
+transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 30.95, 1.92, -0.147)
+
+[node name="Areas" type="Node" parent="."]
+
+[node name="TestKitchen" type="MeshInstance3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149389, 0, -1.29771)
+mesh = ExtResource("1_8fktu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hufpc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Areas/TestKitchen"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/TestKitchen/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_fyxip")
+
+[node name="TestStove" type="MeshInstance3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.954, 0, -2.04222)
+mesh = ExtResource("5_nj1te")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_3cyc5")
+
+[node name="Interactable" type="Node" parent="."]
+
+[node name="StoveInteractable" type="Area3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18669, 0.356327, -3.4872)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_xd16q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/StoveInteractable"]
+shape = SubResource("BoxShape3D_6enhr")
+
+[connection signal="body_entered" from="Interactable/StoveInteractable" to="Interactable/StoveInteractable" method="_on_body_entered"]
+[connection signal="body_exited" from="Interactable/StoveInteractable" to="Interactable/StoveInteractable" method="_on_body_exited"]
