@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://byj1f1aw0aoe"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_4ts2l"]
+[ext_resource type="Script" path="res://Scripts/FoodInstance.cs" id="2_c2jyq"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_4ts2l")
+
+[node name="HeldFood" type="Node" parent="."]
+script = ExtResource("2_c2jyq")

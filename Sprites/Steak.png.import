@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o5ylmurax52v"
-path="res://.godot/imported/texture_1.png-51dcf5c34761e62c2f3caf1b780ec8c0.ctex"
+uid="uid://dk4xr2txbqlvy"
+path.s3tc="res://.godot/imported/Steak.png-dc2948ece53540e43646e495a069d0d0.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Models/texture_1.png"
-dest_files=["res://.godot/imported/texture_1.png-51dcf5c34761e62c2f3caf1b780ec8c0.ctex"]
+source_file="res://Sprites/Steak.png"
+dest_files=["res://.godot/imported/Steak.png-dc2948ece53540e43646e495a069d0d0.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
