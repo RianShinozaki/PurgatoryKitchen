@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://u8aebu3wat72"
+path="res://.godot/imported/OvenMain.obj-0ad7a2ea565600b83a16576ae995825a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/OvenMain.obj-0ad7a2ea565600b83a16576ae995825a.mesh"]
+
+source_file="res://Models/Oven/OvenMain.obj"
+dest_files=["res://.godot/imported/OvenMain.obj-0ad7a2ea565600b83a16576ae995825a.mesh", "res://.godot/imported/OvenMain.obj-0ad7a2ea565600b83a16576ae995825a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(0.5, 0.5, 0.5)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

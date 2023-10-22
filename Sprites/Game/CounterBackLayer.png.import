@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r4clqccem58n"
-path="res://.godot/imported/Mouse.png-361551b6e9ffa81d9cfb346c4cf8b443.ctex"
+uid="uid://c4g7s11m7142u"
+path.s3tc="res://.godot/imported/CounterBackLayer.png-5377d5350b981ec6a0d38001f41f14b2.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Sprites/Mouse.png"
-dest_files=["res://.godot/imported/Mouse.png-361551b6e9ffa81d9cfb346c4cf8b443.ctex"]
+source_file="res://Sprites/Game/CounterBackLayer.png"
+dest_files=["res://.godot/imported/CounterBackLayer.png-5377d5350b981ec6a0d38001f41f14b2.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

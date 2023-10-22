@@ -12,8 +12,9 @@ public partial class HeldFoodVisual : Sprite3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		GD.Print(gm.heldFood.myName);
+		GD.Print(gm.heldFood.cookLevel);
 		//if(gm.heldFood.myTex != null)
 		Texture = gm.heldFood.myTex;
+		Frame = Mathf.Clamp(Mathf.FloorToInt(gm.heldFood.cookLevel), 0, 6);
 	}
 }

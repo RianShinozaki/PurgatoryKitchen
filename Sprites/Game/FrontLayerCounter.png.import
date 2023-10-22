@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk4xr2txbqlvy"
-path.s3tc="res://.godot/imported/Steak.png-dc2948ece53540e43646e495a069d0d0.s3tc.ctex"
+uid="uid://dnxycika52scu"
+path="res://.godot/imported/FrontLayerCounter.png-5af2f27926b6539d239d22617fc9f12d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Steak.png"
-dest_files=["res://.godot/imported/Steak.png-dc2948ece53540e43646e495a069d0d0.s3tc.ctex"]
+source_file="res://Sprites/Game/FrontLayerCounter.png"
+dest_files=["res://.godot/imported/FrontLayerCounter.png-5af2f27926b6539d239d22617fc9f12d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

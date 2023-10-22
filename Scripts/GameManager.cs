@@ -6,8 +6,10 @@ public partial class GameManager : Node
     public enum gameState
     {
         DEFAULT,
-        STOVE,
-        FRIDGE
+        OVEN,
+        FRIDGE,
+        ORDERCOUNTER,
+        SERVECOUNTER
     }
 
     public gameState currentState = gameState.DEFAULT;
@@ -23,9 +25,9 @@ public partial class GameManager : Node
     {
         
     }
-    public void AddNewFood(Texture2D tex, string name)
+    public void AddNewFood(Texture2D tex, string name, float cookedLevel = 0)
     {
-        heldFood.Define(tex, name);
+        heldFood.Define(tex, name, cookedLevel);
         GD.Print("added new food");
     }
     public override void _Process(double delta)

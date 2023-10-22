@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4rngdcg0r2j8"
-path="res://.godot/imported/AutaTopDownTest.png-6228ce60886a3e8cc161d0999cf557fd.ctex"
+uid="uid://btegatxn732hh"
+path.s3tc="res://.godot/imported/texture_1.png-b2984c227717f403b19bfd78b046960b.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Sprites/AutaTopDownTest.png"
-dest_files=["res://.godot/imported/AutaTopDownTest.png-6228ce60886a3e8cc161d0999cf557fd.ctex"]
+source_file="res://Models/Oven/texture_1.png"
+dest_files=["res://.godot/imported/texture_1.png-b2984c227717f403b19bfd78b046960b.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
