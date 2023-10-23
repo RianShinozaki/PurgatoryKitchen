@@ -1,6 +1,6 @@
 [gd_scene load_steps=100 format=3 uid="uid://dhkh1no4we5r1"]
 
-[ext_resource type="Texture2D" uid="uid://4rngdcg0r2j8" path="res://Sprites/Game/AutaTopDownTest.png" id="2_es0k0"]
+[ext_resource type="Texture2D" uid="uid://fr1j0f0wmnbc" path="res://Sprites/Game/Untitled_Artwork.png" id="2_jxfd6"]
 [ext_resource type="Texture2D" uid="uid://cy4o3pwkb65q1" path="res://Sprites/Game/LambTemp.png" id="3_a6qgu"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="3_jkb65"]
 [ext_resource type="Script" path="res://Scripts/CamWobble.cs" id="3_rvib3"]
@@ -26,6 +26,9 @@
 [ext_resource type="Texture2D" uid="uid://c4g7s11m7142u" path="res://Sprites/Game/CounterBackLayer.png" id="23_7q3gj"]
 [ext_resource type="Texture2D" uid="uid://bkkwkeo2x3ley" path="res://Sprites/Game/CustomerGeneric.png" id="23_ieyub"]
 [ext_resource type="Texture2D" uid="uid://dnxycika52scu" path="res://Sprites/Game/FrontLayerCounter.png" id="23_lhx32"]
+[ext_resource type="Script" path="res://Scripts/Customer.cs" id="25_isjvg"]
+[ext_resource type="Resource" uid="uid://d4aqytl037hpu" path="res://Orders/OrderEasy1.tres" id="26_e6wjb"]
+[ext_resource type="Texture2D" uid="uid://c7la0id1xwaxi" path="res://Sprites/Game/OrderBubble.png" id="28_0r3d0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jr7k5"]
 sky_top_color = Color(0.717647, 0.231373, 0.52549, 1)
@@ -48,129 +51,63 @@ glow_bloom = 0.65
 radius = 0.733592
 height = 1.85281
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xgojo"]
-animation = &"IdleLeft"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3su6j"]
+animation = &"Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pc7oc"]
-animation = &"IdleRight"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_321nu"]
+animation = &"Idle_Hold"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tod7a"]
-animation = &"IdleUp"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3lwgh"]
+animation = &"Run"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i4gxs"]
-animation = &"IdleDown"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v5xd1"]
+animation = &"RunHold"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2qy7k"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_xgojo")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_pc7oc")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_tod7a")
-blend_point_2/pos = Vector2(0, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_i4gxs")
-blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mae22"]
-animation = &"RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w4duk"]
-animation = &"RunUp"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgpf0"]
-animation = &"RunRight"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7tw50"]
-animation = &"RunDown"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_eo3mp"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_mae22")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_w4duk")
-blend_point_1/pos = Vector2(0, 1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_wgpf0")
-blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_7tw50")
-blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dyyhk"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1l173"]
 advance_mode = 2
+advance_condition = &"hold"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dhpw"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ji1wc"]
 advance_mode = 2
-advance_condition = &"running"
+advance_condition = &"run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5qlro"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sim1b"]
+advance_mode = 2
+advance_condition = &"hold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhop2"]
+advance_mode = 2
+advance_condition = &"nohold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mpor"]
+advance_mode = 2
+advance_condition = &"nohold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8sn3"]
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnevc"]
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2oji5"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bkm05"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ymvox"]
-states/Idle/node = SubResource("AnimationNodeBlendSpace2D_2qy7k")
-states/Idle/position = Vector2(374, 100)
-states/Run/node = SubResource("AnimationNodeBlendSpace2D_eo3mp")
-states/Run/position = Vector2(561, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dyyhk"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_3dhpw"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_5qlro")]
-
-[sub_resource type="Animation" id="Animation_644bj"]
-resource_name = "IdleDown"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_xxfhk"]
-resource_name = "IdleLeft"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_y8et7"]
-resource_name = "IdleRight"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_ehxa6"]
-resource_name = "IdleUp"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
+states/Idle/node = SubResource("AnimationNodeAnimation_3su6j")
+states/Idle/position = Vector2(353, 63)
+states/Idle_Hold/node = SubResource("AnimationNodeAnimation_321nu")
+states/Idle_Hold/position = Vector2(347, 170)
+states/Run/node = SubResource("AnimationNodeAnimation_3lwgh")
+states/Run/position = Vector2(496, 77)
+states/RunHold/node = SubResource("AnimationNodeAnimation_v5xd1")
+states/RunHold/position = Vector2(553, 170)
+transitions = ["Idle", "Idle_Hold", SubResource("AnimationNodeStateMachineTransition_1l173"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji1wc"), "Run", "RunHold", SubResource("AnimationNodeStateMachineTransition_sim1b"), "RunHold", "Run", SubResource("AnimationNodeStateMachineTransition_yhop2"), "Idle_Hold", "Idle", SubResource("AnimationNodeStateMachineTransition_7mpor"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_r8sn3"), "Idle_Hold", "RunHold", SubResource("AnimationNodeStateMachineTransition_jnevc"), "RunHold", "Idle_Hold", SubResource("AnimationNodeStateMachineTransition_2oji5"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bkm05")]
 
 [sub_resource type="Animation" id="Animation_sj7bh"]
 length = 0.001
@@ -187,11 +124,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_r07bb"]
-resource_name = "RunDown"
-length = 0.6
-loop_mode = 1
-step = 0.15
+[sub_resource type="Animation" id="Animation_ehxa6"]
+resource_name = "Idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -199,32 +133,14 @@ tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_t8ea1"]
-resource_name = "RunLeft"
-length = 0.6
-loop_mode = 1
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [20, 22, 24, 26]
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_6y1im"]
-resource_name = "RunRight"
+resource_name = "Run"
 length = 0.6
 loop_mode = 1
 step = 0.15
@@ -238,11 +154,26 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [8, 10, 12, 13]
+"values": [5, 6, 7, 4]
 }
 
-[sub_resource type="Animation" id="Animation_hqvrw"]
-resource_name = "RunUp"
+[sub_resource type="Animation" id="Animation_7j0gm"]
+resource_name = "Idle_Hold"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_043kw"]
+resource_name = "RunHold"
 length = 0.6
 loop_mode = 1
 step = 0.15
@@ -256,20 +187,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 18, 19]
+"values": [9, 10, 11, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7u7ca"]
 _data = {
-"IdleDown": SubResource("Animation_644bj"),
-"IdleLeft": SubResource("Animation_xxfhk"),
-"IdleRight": SubResource("Animation_y8et7"),
-"IdleUp": SubResource("Animation_ehxa6"),
+"Idle": SubResource("Animation_ehxa6"),
+"Idle_Hold": SubResource("Animation_7j0gm"),
 "RESET": SubResource("Animation_sj7bh"),
-"RunDown": SubResource("Animation_r07bb"),
-"RunLeft": SubResource("Animation_t8ea1"),
-"RunRight": SubResource("Animation_6y1im"),
-"RunUp": SubResource("Animation_hqvrw")
+"Run": SubResource("Animation_6y1im"),
+"RunHold": SubResource("Animation_043kw")
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hcy50"]
@@ -755,6 +682,8 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwf4r"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ph0hl"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_6enhr"]
 size = Vector3(1.33213, 3.49832, 1.61408)
 
@@ -788,22 +717,22 @@ shape = SubResource("CapsuleShape3D_pfyhg")
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478396, 0)
 offset = Vector2(0, 12.865)
-pixel_size = 0.0625
+pixel_size = 0.0313
 billboard = 1
 shaded = true
 texture_filter = 0
-texture = ExtResource("2_es0k0")
-hframes = 6
-vframes = 5
+texture = ExtResource("2_jxfd6")
+hframes = 4
+vframes = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource("AnimationNodeStateMachine_ymvox")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/conditions/hold = false
 parameters/conditions/idle = false
-parameters/conditions/running = false
-parameters/Idle/blend_position = Vector2(0, 0)
-parameters/Run/blend_position = Vector2(0.67, 0)
+parameters/conditions/nohold = false
+parameters/conditions/run = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
@@ -811,12 +740,11 @@ libraries = {
 }
 
 [node name="HeldFood" type="Sprite3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00058341, 1.10292, 0.362654)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202688, 0.930376, 0.362654)
 pixel_size = 0.0313
 billboard = 1
 shaded = true
 texture_filter = 0
-texture = ExtResource("3_a6qgu")
 hframes = 7
 script = ExtResource("11_u0tri")
 
@@ -1139,11 +1067,23 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("23_lhx32")
 
-[node name="Customer" type="Sprite3D" parent="Areas/OrderCounter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.089, 0.13, -0.385)
+[node name="Customers" type="Node3D" parent="Areas/OrderCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7628, 0.13, -0.385)
+
+[node name="Customer" type="Sprite3D" parent="Areas/OrderCounter/Customers"]
 shaded = true
 texture_filter = 0
 texture = ExtResource("23_ieyub")
+script = ExtResource("25_isjvg")
+myOrder = ExtResource("26_e6wjb")
+
+[node name="Area3D" type="Area3D" parent="Areas/OrderCounter/Customers/Customer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.671249, 0, 0)
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/OrderCounter/Customers/Customer/Area3D"]
+shape = SubResource("BoxShape3D_ph0hl")
 
 [node name="BehindCounter" type="Sprite3D" parent="Areas/OrderCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.429, 0, -1.795)
@@ -1186,6 +1126,40 @@ collision_mask = 16
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="OrderBubble" type="Sprite3D" parent="Areas/OrderCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7034, 0.231514, -0.000757456)
+visible = false
+pixel_size = 0.0157
+texture_filter = 0
+texture = ExtResource("28_0r3d0")
+
+[node name="Ingredient1" type="Sprite3D" parent="Areas/OrderCounter/OrderBubble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.32, 0)
+pixel_size = 0.0156
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_a6qgu")
+hframes = 7
+frame = 4
+
+[node name="Ingredient2" type="Sprite3D" parent="Areas/OrderCounter/OrderBubble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.005, 0)
+pixel_size = 0.0156
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_a6qgu")
+hframes = 7
+frame = 4
+
+[node name="Ingredient3" type="Sprite3D" parent="Areas/OrderCounter/OrderBubble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.32, 0)
+pixel_size = 0.0156
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_a6qgu")
+hframes = 7
+frame = 4
 
 [node name="PickupCounter" type="Node" parent="Areas"]
 

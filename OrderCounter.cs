@@ -11,6 +11,11 @@ public partial class OrderCounter : Node
 	Vector3 mouseOrigin;
 	Vector3 mouseRelativePos;
 
+	bool gettingOrder;
+	float orderGettingTime;
+
+	Customer currentCustomer;
+
 	public override void _Ready()
 	{
 		gm = GetNode<GameManager>("/root/GameManager");
@@ -48,15 +53,20 @@ public partial class OrderCounter : Node
 				}
 			}
 		}
+		if(gettingOrder)
+        {
+			orderGettingTime -= (float)delta;
+			if(orderGettingTime <= 0)
+            {
+				gettingOrder = false;
+				gm.currentState = GameManager.gameState.ORDERCOUNTER;
+				currentCustomer.DoneGivingOrder();
+				GetNode<Node3D>("OrderBubble").Visible = false;
+			}
+		}
 
-
-		UpdateAnims();
 	}
 
-	void UpdateAnims()
-	{
-
-	}
 
 	public override void _Input(InputEvent @event)
 	{
@@ -66,4 +76,23 @@ public partial class OrderCounter : Node
 			mouseRelativePos += new Vector3(input.Relative.X, -input.Relative.Y, 0) * 0.002f;
 		}
 	}
+
+	public void ShowOrder(Order order, Customer customer)
+    {
+		gm.currentState = GameManager.gameState.LOCKED;
+		GetNode<Node3D>("OrderBubble").Visible = true;
+		for (int i = 0; i < 3; i++)
+		{
+			Sprite3D sprite = (Sprite3D)GetNode("OrderBubble").GetChild(i);
+			sprite.Texture = null;
+		}
+		for (int i = 0; i < order.ingredients.Count; i++)
+        {
+			Sprite3D sprite = (Sprite3D)GetNode("OrderBubble").GetChild(i);
+			sprite.Texture = (Texture2D)order.textures[i];
+        }
+		orderGettingTime = 3;
+		gettingOrder = true;
+		currentCustomer = customer;
+    }
 }

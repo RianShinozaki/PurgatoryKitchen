@@ -9,7 +9,8 @@ public partial class GameManager : Node
         OVEN,
         FRIDGE,
         ORDERCOUNTER,
-        SERVECOUNTER
+        SERVECOUNTER,
+        LOCKED
     }
 
     public gameState currentState = gameState.DEFAULT;

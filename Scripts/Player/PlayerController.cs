@@ -62,16 +62,32 @@ public partial class PlayerController : CharacterBody3D
     {
 		if (Velocity.IsZeroApprox())
 		{
-			anim.Set("parameters/conditions/running", false);
+			anim.Set("parameters/conditions/run", false);
 			anim.Set("parameters/conditions/idle", true);
 		}
 		if (!Velocity.IsZeroApprox())
 		{
-			anim.Set("parameters/conditions/running", true);
+			anim.Set("parameters/conditions/run", true);
 			anim.Set("parameters/conditions/idle", false);
-			anim.Set("parameters/Idle/blend_position", new Vector2(Velocity.X, -Velocity.Z));
-			anim.Set("parameters/Run/blend_position", new Vector2(Velocity.X, -Velocity.Z));
+			
 
 		}
+		if(Velocity.X != 0)
+        {
+			GetNode<Sprite3D>("Sprite3D").FlipH = (Velocity.X < 0);
+			GetNode<Sprite3D>("HeldFood").Position = new Vector3(0.203f * (Velocity.X < 0 ? -1 : 1), 0.93f, 0.363f);
+		}
+		if(GetNode<Sprite3D>("HeldFood").Texture == null)
+        {
+			anim.Set("parameters/conditions/hold", false);
+			anim.Set("parameters/conditions/nohold", true);
+
+		}
+		else
+        {
+			anim.Set("parameters/conditions/hold", true);
+			anim.Set("parameters/conditions/nohold", false);
+		}
+
 	}
 }
