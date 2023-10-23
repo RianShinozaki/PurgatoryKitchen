@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c17ug10yqx5qv"
+path="res://.godot/imported/CuttingBoard.obj-d76b1e1162ee4fb8e3b1f15788605de8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CuttingBoard.obj-d76b1e1162ee4fb8e3b1f15788605de8.mesh"]
+
+source_file="res://Models/CuttingBoard/CuttingBoard.obj"
+dest_files=["res://.godot/imported/CuttingBoard.obj-d76b1e1162ee4fb8e3b1f15788605de8.mesh", "res://.godot/imported/CuttingBoard.obj-d76b1e1162ee4fb8e3b1f15788605de8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -59,7 +59,6 @@ public partial class OrderCounter : Node
 			if(orderGettingTime <= 0)
             {
 				gettingOrder = false;
-				gm.currentState = GameManager.gameState.ORDERCOUNTER;
 				currentCustomer.DoneGivingOrder();
 				GetNode<Node3D>("OrderBubble").Visible = false;
 			}

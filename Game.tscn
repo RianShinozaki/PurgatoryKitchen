@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://dhkh1no4we5r1"]
+[gd_scene load_steps=116 format=3 uid="uid://dhkh1no4we5r1"]
 
 [ext_resource type="Texture2D" uid="uid://c024cg802fug6" path="res://Sprites/Game/Chef.png" id="2_gtb4f"]
 [ext_resource type="Texture2D" uid="uid://fr1j0f0wmnbc" path="res://Sprites/Game/Plate.png" id="2_tiycc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/CamWobble.cs" id="3_rvib3"]
 [ext_resource type="ArrayMesh" uid="uid://bqvrmdqrmt4xj" path="res://Models/Kitchen.obj" id="4_5xppe"]
 [ext_resource type="Shader" path="res://PixelVoronoi.gdshader" id="4_crjuv"]
+[ext_resource type="Texture2D" uid="uid://cjtvedbkdahnm" path="res://Sprites/E Notification.png" id="4_didxp"]
 [ext_resource type="ArrayMesh" uid="uid://rieddyi440la" path="res://Models/Fridge/Fridge.obj" id="5_7ye5c"]
 [ext_resource type="Texture2D" uid="uid://c4m20tnknoiob" path="res://Models/texture_2.png" id="5_21lyw"]
 [ext_resource type="Script" path="res://Scripts/FinalRenderTexture.cs" id="5_x6fmc"]
@@ -30,10 +31,14 @@
 [ext_resource type="Script" path="res://Scripts/Clickables/OvenFood.cs" id="22_53eqb"]
 [ext_resource type="Script" path="res://OrderCounter.cs" id="22_raecg"]
 [ext_resource type="Texture2D" uid="uid://c4g7s11m7142u" path="res://Sprites/Game/CounterBackLayer.png" id="23_7q3gj"]
+[ext_resource type="Texture2D" uid="uid://bkkwkeo2x3ley" path="res://Sprites/Game/CustomerGeneric.png" id="23_ieyub"]
 [ext_resource type="Texture2D" uid="uid://dnxycika52scu" path="res://Sprites/Game/FrontLayerCounter.png" id="23_lhx32"]
 [ext_resource type="PackedScene" uid="uid://dtcv72i67xmss" path="res://Scenes/customer.tscn" id="24_x02gt"]
 [ext_resource type="Script" path="res://Scripts/PickupCounter.cs" id="27_uissy"]
 [ext_resource type="Texture2D" uid="uid://c7la0id1xwaxi" path="res://Sprites/Game/OrderBubble.png" id="28_0r3d0"]
+[ext_resource type="Resource" uid="uid://csbsnu7igdglv" path="res://Orders/OrderEasy2.tres" id="30_yeqo7"]
+[ext_resource type="Script" path="res://Scripts/Clickables/FoodPlace.cs" id="34_ks7ja"]
+[ext_resource type="Script" path="res://Scripts/Plate.cs" id="34_sklfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jr7k5"]
 sky_top_color = Color(0.717647, 0.231373, 0.52549, 1)
@@ -222,6 +227,53 @@ shader_parameter/colorSmoothRadius = 1.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_fsghs"]
 viewport_path = NodePath("WorldView")
 
+[sub_resource type="Animation" id="Animation_hehs1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_coumw"]
 resource_name = "ScareRed"
 length = 2.0
@@ -268,53 +320,6 @@ tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.3, 1.8)
-}
-
-[sub_resource type="Animation" id="Animation_hehs1"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate:r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate:g")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate:b")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kgubh"]
@@ -805,6 +810,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwf4r"]
+size = Vector3(0.283516, 0.415561, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6enhr"]
 size = Vector3(1.33213, 3.49832, 1.61408)
@@ -869,6 +875,16 @@ shaded = true
 texture_filter = 0
 hframes = 7
 script = ExtResource("11_u0tri")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.02539, 0)
+visible = false
+pixel_size = 0.0313
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+render_priority = 127
+texture = ExtResource("4_didxp")
 
 [node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37, 15.25, 22.215)
@@ -1195,7 +1211,6 @@ texture_filter = 0
 texture = ExtResource("20_yhw12")
 hframes = 7
 script = ExtResource("22_53eqb")
-emptyTex = ExtResource("20_yhw12")
 
 [node name="Area3D" type="Area3D" parent="Areas/OvenScene1/RealOven/OvenFoodSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102844, -0.0622358, -0.331127)
@@ -1213,7 +1228,6 @@ texture_filter = 0
 texture = ExtResource("20_yhw12")
 hframes = 7
 script = ExtResource("22_53eqb")
-emptyTex = ExtResource("20_yhw12")
 
 [node name="Area3D" type="Area3D" parent="Areas/OvenScene1/RealOven/OvenFoodSpot2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102844, -0.0622358, -0.331127)
@@ -1238,6 +1252,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7628, 0.13, -0.385)
 [node name="Customer" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
 
 [node name="Customer2" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
+myOrder = ExtResource("30_yeqo7")
 
 [node name="Customer3" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
 
@@ -1328,12 +1343,77 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("23_lhx32")
 
+[node name="Customer" type="Sprite3D" parent="Areas/PickupCounter/FrontCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945, 0.0128932, -0.11094)
+visible = false
+texture_filter = 0
+texture = ExtResource("23_ieyub")
+
 [node name="Plate" type="Sprite3D" parent="Areas/PickupCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.723, -0.382, 0.164)
 pixel_size = 0.0156
 shaded = true
 texture_filter = 0
+render_priority = 1
 texture = ExtResource("2_tiycc")
+script = ExtResource("34_sklfq")
+
+[node name="ServeFoodSpot" type="Sprite3D" parent="Areas/PickupCounter/Plate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.314)
+pixel_size = 0.0157
+shaded = true
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("20_yhw12")
+hframes = 7
+script = ExtResource("34_ks7ja")
+emptyTex = ExtResource("20_yhw12")
+
+[node name="Area3D" type="Area3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102844, -0.0622358, -0.331127)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot/Area3D"]
+shape = SubResource("BoxShape3D_uwf4r")
+
+[node name="ServeFoodSpot2" type="Sprite3D" parent="Areas/PickupCounter/Plate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314699, 0.09, 0.314)
+pixel_size = 0.0157
+shaded = true
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("20_yhw12")
+hframes = 7
+script = ExtResource("34_ks7ja")
+emptyTex = ExtResource("20_yhw12")
+
+[node name="Area3D" type="Area3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102844, -0.0622358, -0.331127)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot2/Area3D"]
+shape = SubResource("BoxShape3D_uwf4r")
+
+[node name="ServeFoodSpot3" type="Sprite3D" parent="Areas/PickupCounter/Plate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.319, 0.09, 0.314)
+pixel_size = 0.0157
+shaded = true
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("20_yhw12")
+hframes = 7
+script = ExtResource("34_ks7ja")
+emptyTex = ExtResource("20_yhw12")
+
+[node name="Area3D" type="Area3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102844, -0.0622358, -0.331127)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PickupCounter/Plate/ServeFoodSpot3/Area3D"]
+shape = SubResource("BoxShape3D_uwf4r")
 
 [node name="BehindCounter" type="Sprite3D" parent="Areas/PickupCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.802, 0, -1.795)
@@ -1353,6 +1433,16 @@ cycleSpd = 1.0
 amp = 0.01
 myViewPort = NodePath("../../../OrderCounter/CounterViewPort")
 myCamera = NodePath("../../../OrderCounter/CounterViewPort/Camera3D")
+
+[node name="HeldFoodVisual" type="Sprite3D" parent="Areas/PickupCounter/PickupCounterViewPort/Camera3D"]
+transform = Transform3D(4.985, 0, 0, 0, 4.985, 0, 0, 0, 4.985, 0.565, -0.697, -0.113)
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+render_priority = 107
+texture = ExtResource("3_a6qgu")
+hframes = 7
+script = ExtResource("11_u0tri")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Areas/PickupCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8831, 0.776762, 0.623811)

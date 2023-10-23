@@ -10,6 +10,8 @@ public partial class PlayerController : CharacterBody3D
 
 	GameManager gm;
 
+	public Sprite3D InteractNotif;
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
@@ -18,6 +20,7 @@ public partial class PlayerController : CharacterBody3D
         base._Ready();
 		anim = GetNode<AnimationTree>("AnimationTree");
 		gm = GetNode<GameManager>("/root/GameManager");
+		InteractNotif = GetNode<Sprite3D>("Sprite3D2");
 	}
     public override void _PhysicsProcess(double delta)
 	{

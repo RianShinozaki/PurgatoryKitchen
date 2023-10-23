@@ -10,6 +10,8 @@ public partial class InteractableOpenScene : Area3D
 	[Export] public GameManager.gameState myState;
 	[Export] public Node3D sceneView;
 
+	PlayerController thePlayer;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,7 +32,8 @@ public partial class InteractableOpenScene : Area3D
 				{
 					gm.currentState = myState;
 					sceneView.Visible = true;
-					
+					thePlayer.InteractNotif.Visible = false;
+
 				}
 			}
 		else if (Input.IsActionJustPressed("OpenOrClose"))
@@ -39,17 +42,28 @@ public partial class InteractableOpenScene : Area3D
 				
 				gm.currentState = GameManager.gameState.DEFAULT;
 				sceneView.Visible = false;
-			}
+					thePlayer.InteractNotif.Visible = true;
+				}
 		}
 	}
 
 	private void _on_body_entered(Node3D node)
 	{
 		inContact = true;
+		if(node is PlayerController player)
+        {
+			thePlayer = player;
+			player.InteractNotif.Visible = true;
+        }
 	}
 
 	private void _on_body_exited(Node3D node)
 	{
 		inContact = false;
+		if (node is PlayerController player)
+		{
+			thePlayer = player;
+			player.InteractNotif.Visible = false;
+		}
 	}
 }

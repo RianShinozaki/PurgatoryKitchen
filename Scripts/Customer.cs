@@ -10,7 +10,7 @@ public partial class Customer : Clickable
 	[Export] public Order myOrder;
 
 	public bool GoingAway;
-	[Export] public Node3D OrderParent;
+	 public Node3D OrderParent;
 	[Export] PackedScene orderObject;
 
 	public override void _Ready()
@@ -29,10 +29,12 @@ public partial class Customer : Clickable
             {
 				Node anOrder = orderObject.Instantiate();
 				OrderTicket tick = (OrderTicket)anOrder;
+				OrderParent.AddChild(anOrder);
+
 				tick.Define(myOrder);
 				tick.waitTime = WaitingTime;
+				gm.currentState = GameManager.gameState.ORDERCOUNTER;
 
-				OrderParent.AddChild(anOrder);
 				QueueFree();
             }
         }

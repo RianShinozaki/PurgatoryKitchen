@@ -16,7 +16,7 @@ public partial class GameManager : Node
         LOCKED
     }
 
-    public gameState currentState = gameState.DEFAULT;
+    [Export] public gameState currentState = gameState.DEFAULT;
     public FoodInstance heldFood;
 
     public override void _Ready()

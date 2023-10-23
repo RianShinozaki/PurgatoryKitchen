@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c4pb0rvgbfxxk"
+path="res://.godot/imported/FryerMain_.obj-d8d2e1d332281f8c2acd0bdd898373ed.mesh"
+
+[deps]
+
+files=["res://.godot/imported/FryerMain_.obj-d8d2e1d332281f8c2acd0bdd898373ed.mesh"]
+
+source_file="res://Models/Fryer/FryerMain_.obj"
+dest_files=["res://.godot/imported/FryerMain_.obj-d8d2e1d332281f8c2acd0bdd898373ed.mesh", "res://.godot/imported/FryerMain_.obj-d8d2e1d332281f8c2acd0bdd898373ed.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

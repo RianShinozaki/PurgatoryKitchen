@@ -14,7 +14,8 @@ public partial class PickupCounter : Node
 	bool gettingOrder;
 	float orderGettingTime;
 
-	Customer currentCustomer;
+	Sprite3D customer;
+	Plate plate;
 
 	public override void _Ready()
 	{
@@ -22,6 +23,8 @@ public partial class PickupCounter : Node
 		mouse = GetNode<Sprite3D>("Mouse");
 		ray = mouse.GetNode<RayCast3D>("RayCast3D");
 		mouseOrigin = mouse.Position;
+		customer = GetNode("FrontCounter").GetNode<Sprite3D>("Customer");
+		plate = GetNode<Plate>("Plate");
 	}
 
 
@@ -53,10 +56,19 @@ public partial class PickupCounter : Node
 				}
 			}
 		}
+		if(gettingOrder)
+        {
+			orderGettingTime -= (float)delta;
+			if(orderGettingTime <= 0)
+            {
+				gm.currentState = GameManager.gameState.SERVECOUNTER;
+				customer.Visible = false;
+				plate.SweepOrder();
+				gettingOrder = false;
+			}
+        }
 
 	}
-
-
 	public override void _Input(InputEvent @event)
 	{
 		base._Input(@event);
@@ -66,4 +78,11 @@ public partial class PickupCounter : Node
 		}
 	}
 
+	public void SuccessfulOrder()
+    {
+		gm.currentState = GameManager.gameState.LOCKED;
+		customer.Visible = true;
+		orderGettingTime = 3;
+		gettingOrder = true;
+	}
 }
