@@ -1,10 +1,12 @@
-[gd_scene load_steps=100 format=3 uid="uid://dhkh1no4we5r1"]
+[gd_scene load_steps=104 format=3 uid="uid://dhkh1no4we5r1"]
 
-[ext_resource type="Texture2D" uid="uid://fr1j0f0wmnbc" path="res://Sprites/Game/Untitled_Artwork.png" id="2_jxfd6"]
+[ext_resource type="Texture2D" uid="uid://c024cg802fug6" path="res://Sprites/Game/Chef.png" id="2_gtb4f"]
+[ext_resource type="Texture2D" uid="uid://fr1j0f0wmnbc" path="res://Sprites/Game/Plate.png" id="2_tiycc"]
 [ext_resource type="Texture2D" uid="uid://cy4o3pwkb65q1" path="res://Sprites/Game/LambTemp.png" id="3_a6qgu"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="3_jkb65"]
 [ext_resource type="Script" path="res://Scripts/CamWobble.cs" id="3_rvib3"]
 [ext_resource type="ArrayMesh" uid="uid://bqvrmdqrmt4xj" path="res://Models/Kitchen.obj" id="4_5xppe"]
+[ext_resource type="Shader" path="res://PixelVoronoi.gdshader" id="4_crjuv"]
 [ext_resource type="ArrayMesh" uid="uid://rieddyi440la" path="res://Models/Fridge/Fridge.obj" id="5_7ye5c"]
 [ext_resource type="Texture2D" uid="uid://c4m20tnknoiob" path="res://Models/texture_2.png" id="5_21lyw"]
 [ext_resource type="Texture2D" uid="uid://o5ylmurax52v" path="res://Models/Fridge/texture_1.png" id="7_5i4yp"]
@@ -24,10 +26,9 @@
 [ext_resource type="Script" path="res://Scripts/Clickables/OvenFood.cs" id="22_53eqb"]
 [ext_resource type="Script" path="res://OrderCounter.cs" id="22_raecg"]
 [ext_resource type="Texture2D" uid="uid://c4g7s11m7142u" path="res://Sprites/Game/CounterBackLayer.png" id="23_7q3gj"]
-[ext_resource type="Texture2D" uid="uid://bkkwkeo2x3ley" path="res://Sprites/Game/CustomerGeneric.png" id="23_ieyub"]
 [ext_resource type="Texture2D" uid="uid://dnxycika52scu" path="res://Sprites/Game/FrontLayerCounter.png" id="23_lhx32"]
-[ext_resource type="Script" path="res://Scripts/Customer.cs" id="25_isjvg"]
-[ext_resource type="Resource" uid="uid://d4aqytl037hpu" path="res://Orders/OrderEasy1.tres" id="26_e6wjb"]
+[ext_resource type="PackedScene" uid="uid://dtcv72i67xmss" path="res://Scenes/customer.tscn" id="24_x02gt"]
+[ext_resource type="Script" path="res://Scripts/PickupCounter.cs" id="27_uissy"]
 [ext_resource type="Texture2D" uid="uid://c7la0id1xwaxi" path="res://Sprites/Game/OrderBubble.png" id="28_0r3d0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jr7k5"]
@@ -109,21 +110,6 @@ states/RunHold/node = SubResource("AnimationNodeAnimation_v5xd1")
 states/RunHold/position = Vector2(553, 170)
 transitions = ["Idle", "Idle_Hold", SubResource("AnimationNodeStateMachineTransition_1l173"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji1wc"), "Run", "RunHold", SubResource("AnimationNodeStateMachineTransition_sim1b"), "RunHold", "Run", SubResource("AnimationNodeStateMachineTransition_yhop2"), "Idle_Hold", "Idle", SubResource("AnimationNodeStateMachineTransition_7mpor"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_r8sn3"), "Idle_Hold", "RunHold", SubResource("AnimationNodeStateMachineTransition_jnevc"), "RunHold", "Idle_Hold", SubResource("AnimationNodeStateMachineTransition_2oji5"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bkm05")]
 
-[sub_resource type="Animation" id="Animation_sj7bh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="Animation" id="Animation_ehxa6"]
 resource_name = "Idle"
 tracks/0/type = "value"
@@ -137,6 +123,36 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_7j0gm"]
+resource_name = "Idle_Hold"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_sj7bh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_6y1im"]
@@ -155,21 +171,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 4]
-}
-
-[sub_resource type="Animation" id="Animation_7j0gm"]
-resource_name = "Idle_Hold"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_043kw"]
@@ -198,6 +199,24 @@ _data = {
 "Run": SubResource("Animation_6y1im"),
 "RunHold": SubResource("Animation_043kw")
 }
+
+[sub_resource type="Environment" id="Environment_oe0mu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ysqkt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y242x"]
+render_priority = 0
+shader = ExtResource("4_crjuv")
+shader_parameter/screenSize = Vector2(640, 360)
+shader_parameter/voronoiSize = Vector2(1, 1)
+shader_parameter/voronoiDisorder = 1.0
+shader_parameter/timeScale = Vector2(5, 5)
+shader_parameter/colorSmoothDir = 0.0
+shader_parameter/colorSmoothSamples = 1.0
+shader_parameter/colorSmoothRadius = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fsghs"]
+viewport_path = NodePath("WorldView")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hcy50"]
 viewport_path = NodePath("Areas/OvenScene1/OvenViewPort")
@@ -682,8 +701,6 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwf4r"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ph0hl"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_6enhr"]
 size = Vector3(1.33213, 3.49832, 1.61408)
 
@@ -721,7 +738,7 @@ pixel_size = 0.0313
 billboard = 1
 shaded = true
 texture_filter = 0
-texture = ExtResource("2_jxfd6")
+texture = ExtResource("2_gtb4f")
 hframes = 4
 vframes = 3
 
@@ -749,43 +766,63 @@ hframes = 7
 script = ExtResource("11_u0tri")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.824126, 0.566406, 0, -0.566406, 0.824126, -1.63, 15.15, 19.115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37, 15.25, 22.215)
+environment = SubResource("Environment_oe0mu")
+projection = 1
 current = true
 fov = 25.8
+size = 8.0
 
-[node name="OvenScene" type="Sprite3D" parent="MainCamera"]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -4.76837e-07, -3.12)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCamera"]
+transform = Transform3D(13.66, 0, 0, 0, 13.77, 0, 0, 0, 1, 0, 0, -0.105)
+mesh = SubResource("QuadMesh_ysqkt")
+surface_material_override/0 = SubResource("ShaderMaterial_y242x")
+
+[node name="Sprite3D" type="Sprite3D" parent="MainCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.415, -2.195)
+transparent = false
+texture = SubResource("ViewportTexture_fsghs")
+
+[node name="WorldView" type="SubViewport" parent="."]
+size = Vector2i(1600, 900)
+
+[node name="WorldCam" type="Camera3D" parent="WorldView"]
+transform = Transform3D(1, 0, 0, 0, 0.824126, 0.566406, 0, -0.566406, 0.824126, -1.63, 15.15, 19.115)
+fov = 25.8
+
+[node name="OvenScene" type="Sprite3D" parent="WorldView/WorldCam"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.128863, -3.81526)
 visible = false
 texture = SubResource("ViewportTexture_hcy50")
 
-[node name="Frame" type="Sprite3D" parent="MainCamera/OvenScene"]
+[node name="Frame" type="Sprite3D" parent="WorldView/WorldCam/OvenScene"]
 transform = Transform3D(8.28, 0, 0, 0, 8.28, 0, 0, 0, 8.28, 0, 0, -0.1)
 texture = SubResource("GradientTexture2D_hr4iu")
 
-[node name="FridgeScene" type="Sprite3D" parent="MainCamera"]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -4.76837e-06, -3.12001)
+[node name="FridgeScene" type="Sprite3D" parent="WorldView/WorldCam"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.128862, -3.81527)
 visible = false
 texture = SubResource("ViewportTexture_38jpn")
 
-[node name="Frame" type="Sprite3D" parent="MainCamera/FridgeScene"]
+[node name="Frame" type="Sprite3D" parent="WorldView/WorldCam/FridgeScene"]
 transform = Transform3D(8.28, 0, 0, 0, 8.28, 0, 0, 0, 8.28, 0, 0, -0.1)
 texture = SubResource("GradientTexture2D_hr4iu")
 
-[node name="OrderCounterScene" type="Sprite3D" parent="MainCamera"]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -4.76837e-06, -3.12001)
+[node name="OrderCounterScene" type="Sprite3D" parent="WorldView/WorldCam"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.128862, -3.81527)
 visible = false
 texture = SubResource("ViewportTexture_ws8mi")
 
-[node name="Frame" type="Sprite3D" parent="MainCamera/OrderCounterScene"]
+[node name="Frame" type="Sprite3D" parent="WorldView/WorldCam/OrderCounterScene"]
 transform = Transform3D(8.28, 0, 0, 0, 8.28, 0, 0, 0, 8.28, 0, 0, -0.1)
 texture = SubResource("GradientTexture2D_hr4iu")
 
-[node name="ServeCounterScene" type="Sprite3D" parent="MainCamera"]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -4.76837e-06, -3.12001)
+[node name="ServeCounterScene" type="Sprite3D" parent="WorldView/WorldCam"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.128862, -3.81527)
 visible = false
 texture = SubResource("ViewportTexture_a4dxw")
 
-[node name="Frame" type="Sprite3D" parent="MainCamera/ServeCounterScene"]
+[node name="Frame" type="Sprite3D" parent="WorldView/WorldCam/ServeCounterScene"]
 transform = Transform3D(8.28, 0, 0, 0, 8.28, 0, 0, 0, 8.28, 0, 0, -0.1)
 texture = SubResource("GradientTexture2D_hr4iu")
 
@@ -1070,20 +1107,13 @@ texture = ExtResource("23_lhx32")
 [node name="Customers" type="Node3D" parent="Areas/OrderCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7628, 0.13, -0.385)
 
-[node name="Customer" type="Sprite3D" parent="Areas/OrderCounter/Customers"]
-shaded = true
-texture_filter = 0
-texture = ExtResource("23_ieyub")
-script = ExtResource("25_isjvg")
-myOrder = ExtResource("26_e6wjb")
+[node name="Customer" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
 
-[node name="Area3D" type="Area3D" parent="Areas/OrderCounter/Customers/Customer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.671249, 0, 0)
-collision_layer = 16
-collision_mask = 16
+[node name="Customer2" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/OrderCounter/Customers/Customer/Area3D"]
-shape = SubResource("BoxShape3D_ph0hl")
+[node name="Customer3" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
+
+[node name="Customer4" parent="Areas/OrderCounter/Customers" instance=ExtResource("24_x02gt")]
 
 [node name="BehindCounter" type="Sprite3D" parent="Areas/OrderCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.429, 0, -1.795)
@@ -1162,6 +1192,7 @@ hframes = 7
 frame = 4
 
 [node name="PickupCounter" type="Node" parent="Areas"]
+script = ExtResource("27_uissy")
 
 [node name="FrontCounter" type="Sprite3D" parent="Areas/PickupCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.512, 0, 0)
@@ -1169,11 +1200,12 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("23_lhx32")
 
-[node name="Customer" type="Sprite3D" parent="Areas/PickupCounter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.462, 0.13, -0.385)
+[node name="Plate" type="Sprite3D" parent="Areas/PickupCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.723, -0.382, 0.164)
+pixel_size = 0.0156
 shaded = true
 texture_filter = 0
-texture = ExtResource("23_ieyub")
+texture = ExtResource("2_tiycc")
 
 [node name="BehindCounter" type="Sprite3D" parent="Areas/PickupCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.802, 0, -1.795)
@@ -1200,6 +1232,26 @@ light_color = Color(0.988235, 0.964706, 0.8, 1)
 light_energy = 0.738
 omni_range = 2.445
 
+[node name="Mouse" type="Sprite3D" parent="Areas/PickupCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.7192, 0.1993, 0.728441)
+pixel_size = 0.0156
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+render_priority = 127
+texture = ExtResource("15_eqdto")
+hframes = 2
+
+[node name="RayCast3D" type="RayCast3D" parent="Areas/PickupCounter/Mouse"]
+target_position = Vector3(0, 0, -20)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="OrderTickets" type="Node3D" parent="Areas/PickupCounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.18, 0.425, 0)
+
 [node name="Interactable" type="Node" parent="."]
 
 [node name="FridgeInteractable" type="Area3D" parent="Interactable" node_paths=PackedStringArray("sceneView")]
@@ -1208,7 +1260,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ia1q8")
 myState = 2
-sceneView = NodePath("../../MainCamera/FridgeScene")
+sceneView = NodePath("../../WorldView/WorldCam/FridgeScene")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/FridgeInteractable"]
 shape = SubResource("BoxShape3D_6enhr")
@@ -1227,7 +1279,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ia1q8")
 myState = 1
-sceneView = NodePath("../../MainCamera/OvenScene")
+sceneView = NodePath("../../WorldView/WorldCam/OvenScene")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/Oven1Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0681591, 0, -0.806904)
@@ -1247,7 +1299,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ia1q8")
 myState = 3
-sceneView = NodePath("../../MainCamera/OrderCounterScene")
+sceneView = NodePath("../../WorldView/WorldCam/OrderCounterScene")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/OrderCounterInteractable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.951648, 0, -0.806904)
@@ -1259,7 +1311,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ia1q8")
 myState = 4
-sceneView = NodePath("../../MainCamera/ServeCounterScene")
+sceneView = NodePath("../../WorldView/WorldCam/ServeCounterScene")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/PickupCounterInteractable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.951648, 0, -0.806904)
