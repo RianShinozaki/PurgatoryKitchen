@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj32s13qfbn6i"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_hdxmf"]
+[ext_resource type="PackedScene" uid="uid://dhkh1no4we5r1" path="res://Game.tscn" id="2_kbciu"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdxmf")
+GamePath = ExtResource("2_kbciu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 94.68
+grow_horizontal = 2
+text = "Insert Title Here
+(Change this node's type from label to texture rect)"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -65.0
+offset_right = 150.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 15.0
+offset_right = 150.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[connection signal="pressed" from="Play" to="." method="OnPlayClicked"]
+[connection signal="pressed" from="Quit" to="." method="OnQuitClicked"]

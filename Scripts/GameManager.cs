@@ -19,18 +19,20 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         base._Ready();
-        Input.MouseMode = Input.MouseModeEnum.Captured;
         heldFood = GetNode<FoodInstance>("HeldFood");
     }
+
     public void TrashFood()
     {
         
     }
+
     public void AddNewFood(Texture2D tex, string name, float cookedLevel = 0)
     {
         heldFood.Define(tex, name, cookedLevel);
         GD.Print("added new food");
     }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
