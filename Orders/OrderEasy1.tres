@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_xlm0h")
-ingredients = ["Lamb", "Lamb", "Lamb"]
-textures = [ExtResource("2_85172"), ExtResource("2_85172"), ExtResource("2_85172")]
+ingredients = ["Lamb"]
+textures = [ExtResource("2_85172")]

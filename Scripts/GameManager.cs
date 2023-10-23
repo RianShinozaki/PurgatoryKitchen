@@ -3,6 +3,9 @@ using System;
 
 public partial class GameManager : Node
 {
+    [Signal]
+    public delegate void JumpscaredEventHandler();
+
     public enum gameState
     {
         DEFAULT,
@@ -38,5 +41,9 @@ public partial class GameManager : Node
         {
             GetTree().Quit();
         }
+    }
+    public void InvokeScare()
+    {
+        EmitSignal(SignalName.Jumpscared);
     }
 }

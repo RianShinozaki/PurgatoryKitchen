@@ -13,6 +13,15 @@ public partial class RealFridge : MeshInstance3D
 	Vector3 mouseOrigin;
 	Vector3 mouseRelativePos;
 
+	RandomNumberGenerator randomGen = new RandomNumberGenerator();
+
+	bool jumpscaring = false;
+	float jumpscaretime = 0;
+
+	[Export] PackedScene jumpscareLady;
+	[Export] Node jumpscareParent;
+	[Export] Sprite3D FridgeScene;
+
 	public override void _Ready()
 	{
 		anim = GetNode<AnimationTree>("AnimationTree");
@@ -27,28 +36,38 @@ public partial class RealFridge : MeshInstance3D
 	{
 		if (gm.currentState == GameManager.gameState.FRIDGE)
 		{
-			/*Vector3 velocity = Vector3.Zero;
-			Vector2 inputDir = Input.GetVector("left", "right", "down", "up");
-			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-			float Speed = 0.2f;
-			if (direction != Vector3.Zero)
-			{
-				velocity.X = direction.X * Speed;
-				velocity.Y = direction.Z * Speed;
-			}
-			mouse.Position += velocity;
-			float bounds = 1.2f;
-			mouse.Position = new Vector3(Mathf.Clamp(mouse.Position.X, mouseOrigin.X - bounds, mouseOrigin.X + bounds), Mathf.Clamp(mouse.Position.Y, mouseOrigin.Y - bounds, mouseOrigin.Y + bounds), mouseOrigin.Z);
-			*/
+
 			float bounds = 1.2f;
 			mouse.Position = new Vector3(Mathf.Clamp(mouseOrigin.X + mouseRelativePos.X, mouseOrigin.X - bounds, mouseOrigin.X + bounds), Mathf.Clamp(mouseOrigin.Y + mouseRelativePos.Y, mouseOrigin.Y - bounds, mouseOrigin.Y + bounds), mouseOrigin.Z);
 
 			if (Input.IsActionJustPressed("Interact"))
 			{
+				if(!open)
+                {
+					float rand = randomGen.Randf();
+					if(rand <= 0.1f) //Spooky time
+                    {
+						GetNode<Node3D>("Jumpscare").Visible = true;
+						GetNode<Node3D>("FridgeContents").Visible = false;
+						jumpscaring = true;
+						jumpscaretime = 0;
+						
+
+                    } else
+                    {
+						GetNode<Node3D>("Jumpscare").Visible = false;
+						GetNode<Node3D>("FridgeContents").Visible = true;
+						jumpscaring = false;
+					}
+                } else
+                {
+					jumpscaring = false;
+
+				}
 				open = !open;
 			}
 
-			if (ray.IsColliding() && open)
+			if (ray.IsColliding() && open && !jumpscaring)
 			{
 				mouse.Frame = 1;
 			}
@@ -56,7 +75,7 @@ public partial class RealFridge : MeshInstance3D
             {
 				mouse.Frame = 0;
             }
-			if (Input.IsActionJustPressed("LeftClick") && open)
+			if (Input.IsActionJustPressed("LeftClick") && open && !jumpscaring)
 			{
 				if(ray.IsColliding())
                 {
@@ -66,6 +85,18 @@ public partial class RealFridge : MeshInstance3D
 					clickable.OnClicked();
 				}
 			}
+			if(jumpscaring)
+            {
+				jumpscaretime += 1;
+				if(jumpscaretime >= 120)
+                {
+					Node jumpy = jumpscareLady.Instantiate();
+					jumpscareParent.AddChild(jumpy);
+					gm.currentState = GameManager.gameState.DEFAULT;
+					FridgeScene.Visible = false;
+					jumpscaring = false;
+				}
+            }
 		}
 
 		if (gm.currentState != GameManager.gameState.FRIDGE)

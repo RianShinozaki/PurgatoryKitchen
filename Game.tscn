@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://dhkh1no4we5r1"]
+[gd_scene load_steps=111 format=3 uid="uid://dhkh1no4we5r1"]
 
 [ext_resource type="Texture2D" uid="uid://c024cg802fug6" path="res://Sprites/Game/Chef.png" id="2_gtb4f"]
 [ext_resource type="Texture2D" uid="uid://fr1j0f0wmnbc" path="res://Sprites/Game/Plate.png" id="2_tiycc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Shader" path="res://PixelVoronoi.gdshader" id="4_crjuv"]
 [ext_resource type="ArrayMesh" uid="uid://rieddyi440la" path="res://Models/Fridge/Fridge.obj" id="5_7ye5c"]
 [ext_resource type="Texture2D" uid="uid://c4m20tnknoiob" path="res://Models/texture_2.png" id="5_21lyw"]
+[ext_resource type="Script" path="res://Scripts/FinalRenderTexture.cs" id="5_x6fmc"]
+[ext_resource type="Script" path="res://Scripts/WorldCam.cs" id="6_7ixon"]
 [ext_resource type="Texture2D" uid="uid://o5ylmurax52v" path="res://Models/Fridge/texture_1.png" id="7_5i4yp"]
 [ext_resource type="ArrayMesh" uid="uid://e7m200paaa2a" path="res://Models/Fridge/FridgeDoor.obj" id="7_mrcl0"]
 [ext_resource type="ArrayMesh" uid="uid://dq046pvbswpv2" path="res://Models/CloseUpScene.obj" id="8_2xu00"]
@@ -17,7 +19,9 @@
 [ext_resource type="ArrayMesh" uid="uid://w2gxpsb70vyo" path="res://Models/Fridge/FridgeShelf.obj" id="11_y6847"]
 [ext_resource type="Script" path="res://Scripts/InteractableOpenScene.cs" id="12_ia1q8"]
 [ext_resource type="Script" path="res://FoodGenClickable.cs" id="13_juj3r"]
+[ext_resource type="Texture2D" uid="uid://g36bkymq3dei" path="res://Sprites/Game/Eyesockent.png" id="14_l7q05"]
 [ext_resource type="Texture2D" uid="uid://r4clqccem58n" path="res://Sprites/Game/Mouse.png" id="15_eqdto"]
+[ext_resource type="PackedScene" uid="uid://bot0xn03xfjmb" path="res://Scenes/lady_jumpscare.tscn" id="16_0ctto"]
 [ext_resource type="ArrayMesh" uid="uid://u8aebu3wat72" path="res://Models/Oven/OvenMain.obj" id="16_g7a8q"]
 [ext_resource type="Texture2D" uid="uid://btegatxn732hh" path="res://Models/Oven/texture_1.png" id="17_ikho2"]
 [ext_resource type="Script" path="res://Scripts/RealOven.cs" id="18_0l778"]
@@ -217,6 +221,107 @@ shader_parameter/colorSmoothRadius = 1.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fsghs"]
 viewport_path = NodePath("WorldView")
+
+[sub_resource type="Animation" id="Animation_coumw"]
+resource_name = "ScareRed"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.890196, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.0901961, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1.8)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1.8)
+}
+
+[sub_resource type="Animation" id="Animation_hehs1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kgubh"]
+_data = {
+"RESET": SubResource("Animation_hehs1"),
+"ScareRed": SubResource("Animation_coumw")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hcy50"]
 viewport_path = NodePath("Areas/OvenScene1/OvenViewPort")
@@ -782,6 +887,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_y242x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.415, -2.195)
 transparent = false
 texture = SubResource("ViewportTexture_fsghs")
+script = ExtResource("5_x6fmc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainCamera/Sprite3D"]
+libraries = {
+"": SubResource("AnimationLibrary_kgubh")
+}
 
 [node name="WorldView" type="SubViewport" parent="."]
 size = Vector2i(1600, 900)
@@ -789,6 +900,7 @@ size = Vector2i(1600, 900)
 [node name="WorldCam" type="Camera3D" parent="WorldView"]
 transform = Transform3D(1, 0, 0, 0, 0.824126, 0.566406, 0, -0.566406, 0.824126, -1.63, 15.15, 19.115)
 fov = 25.8
+script = ExtResource("6_7ixon")
 
 [node name="OvenScene" type="Sprite3D" parent="WorldView/WorldCam"]
 transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.128863, -3.81526)
@@ -896,12 +1008,26 @@ texture = ExtResource("3_a6qgu")
 hframes = 7
 script = ExtResource("11_u0tri")
 
-[node name="RealFridge" type="MeshInstance3D" parent="Areas/FridgeScene"]
+[node name="RealFridge" type="MeshInstance3D" parent="Areas/FridgeScene" node_paths=PackedStringArray("jumpscareParent", "FridgeScene")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1, 1.6, -4)
 mesh = ExtResource("5_7ye5c")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_6p0w6")
 script = ExtResource("10_cs8ed")
+jumpscareLady = ExtResource("16_0ctto")
+jumpscareParent = NodePath("../../../WorldView/WorldCam")
+FridgeScene = NodePath("../../../WorldView/WorldCam/FridgeScene")
+
+[node name="Jumpscare" type="Sprite3D" parent="Areas/FridgeScene/RealFridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, -0.397764, -0.1902)
+visible = false
+pixel_size = 0.0313
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_l7q05")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Areas/FridgeScene/RealFridge/Jumpscare"]
+light_color = Color(0.8, 0, 0.105882, 1)
 
 [node name="FridgeDoor" type="MeshInstance3D" parent="Areas/FridgeScene/RealFridge"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -1.285, 0)
@@ -927,44 +1053,6 @@ libraries = {
 "": SubResource("AnimationLibrary_fx6tl")
 }
 
-[node name="FridgeShelf" type="MeshInstance3D" parent="Areas/FridgeScene/RealFridge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, 0.1, -0.0999999)
-mesh = ExtResource("11_y6847")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_c2htr")
-
-[node name="FridgeShelf2" type="MeshInstance3D" parent="Areas/FridgeScene/RealFridge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -0.6, -0.0999999)
-mesh = ExtResource("11_y6847")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_c2htr")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Areas/FridgeScene/RealFridge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0.6, 0)
-light_energy = 0.215
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 0.0
-
-[node name="Lamb" type="Sprite3D" parent="Areas/FridgeScene/RealFridge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.397764, -0.4902)
-pixel_size = 0.0313
-shaded = true
-texture_filter = 0
-texture = ExtResource("3_a6qgu")
-hframes = 7
-script = ExtResource("13_juj3r")
-myFoodName = "Lamb"
-myFoodTexture = ExtResource("3_a6qgu")
-
-[node name="Area3D" type="Area3D" parent="Areas/FridgeScene/RealFridge/Lamb"]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/FridgeScene/RealFridge/Lamb/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.181819)
-shape = SubResource("BoxShape3D_mj3js")
-
 [node name="Mouse" type="Sprite3D" parent="Areas/FridgeScene/RealFridge"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77471, -0.115286, 0)
 pixel_size = 0.0313
@@ -981,6 +1069,46 @@ collision_mask = 16
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="FridgeContents" type="Node3D" parent="Areas/FridgeScene/RealFridge"]
+
+[node name="FridgeShelf" type="MeshInstance3D" parent="Areas/FridgeScene/RealFridge/FridgeContents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, 0.1, -0.0999999)
+mesh = ExtResource("11_y6847")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_c2htr")
+
+[node name="FridgeShelf2" type="MeshInstance3D" parent="Areas/FridgeScene/RealFridge/FridgeContents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, -0.6, -0.0999999)
+mesh = ExtResource("11_y6847")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_c2htr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Areas/FridgeScene/RealFridge/FridgeContents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0.6, 0)
+light_energy = 0.215
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 0.0
+
+[node name="Lamb" type="Sprite3D" parent="Areas/FridgeScene/RealFridge/FridgeContents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.397764, -0.4902)
+pixel_size = 0.0313
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_a6qgu")
+hframes = 7
+script = ExtResource("13_juj3r")
+myFoodName = "Lamb"
+myFoodTexture = ExtResource("3_a6qgu")
+
+[node name="Area3D" type="Area3D" parent="Areas/FridgeScene/RealFridge/FridgeContents/Lamb"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/FridgeScene/RealFridge/FridgeContents/Lamb/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.181819)
+shape = SubResource("BoxShape3D_mj3js")
 
 [node name="OvenScene1" type="Node" parent="Areas"]
 
@@ -1317,7 +1445,7 @@ sceneView = NodePath("../../WorldView/WorldCam/ServeCounterScene")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.951648, 0, -0.806904)
 shape = SubResource("BoxShape3D_h2nq0")
 
-[connection signal="mouse_entered" from="Areas/FridgeScene/RealFridge/Lamb/Area3D" to="Areas/FridgeScene/RealFridge/Lamb" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_entered" from="Areas/FridgeScene/RealFridge/FridgeContents/Lamb/Area3D" to="Areas/FridgeScene/RealFridge/FridgeContents/Lamb" method="_on_area_3d_mouse_entered"]
 [connection signal="body_entered" from="Interactable/FridgeInteractable" to="Interactable/FridgeInteractable" method="_on_body_entered"]
 [connection signal="body_exited" from="Interactable/FridgeInteractable" to="Interactable/FridgeInteractable" method="_on_body_exited"]
 [connection signal="body_entered" from="Interactable/Oven1Interactable" to="Interactable/Oven1Interactable" method="_on_body_entered"]
