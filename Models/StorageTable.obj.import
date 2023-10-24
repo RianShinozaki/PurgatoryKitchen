@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5o4hsc64jukx"
+path="res://.godot/imported/StorageTable.obj-8231b05b951f7c581ca04041d7383133.mesh"
+
+[deps]
+
+files=["res://.godot/imported/StorageTable.obj-8231b05b951f7c581ca04041d7383133.mesh"]
+
+source_file="res://Models/StorageTable.obj"
+dest_files=["res://.godot/imported/StorageTable.obj-8231b05b951f7c581ca04041d7383133.mesh", "res://.godot/imported/StorageTable.obj-8231b05b951f7c581ca04041d7383133.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(0.5, 0.5, 0.5)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

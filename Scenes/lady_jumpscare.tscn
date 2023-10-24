@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx0myu3jtucgo"]
+[gd_scene load_steps=7 format=3 uid="uid://bot0xn03xfjmb"]
 
 [ext_resource type="Texture2D" uid="uid://7d3k5b0hlhli" path="res://Sprites/Game/JumpscareHead.png" id="1_t8nfk"]
 [ext_resource type="Script" path="res://Scripts/Jumpscare.cs" id="2_r1c4a"]
+[ext_resource type="AudioStream" uid="uid://ct1fsvqlxpgvt" path="res://Sounds/jumpscare1.mp3" id="3_omqjc"]
 
 [sub_resource type="Animation" id="Animation_y5ltm"]
 length = 0.001
@@ -85,7 +86,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_qvjjr"]
 resource_name = "Scare"
-length = 0.4
+length = 7.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -163,6 +164,21 @@ tracks/6/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.1, 0.4)
 }
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_omqjc")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/7/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rlejm"]
 _data = {
@@ -180,12 +196,14 @@ ScarePhrase = "CLOSE THE FRIDGE"
 PhraseSize = 60
 PhraseCount = 30
 PhraseSpawnSpeed = 0.15
-PhraseLifeTime = 1.0
+PhraseLifeTime = 0.5
 PhraseFlashSpeed = 0.05
 PhraseColor1 = Color(1, 0, 0, 1)
-PhraseColor2 = Color(1, 1, 1, 1)
+PhraseColor2 = Color(0.486275, 0.0901961, 0.172549, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_rlejm")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

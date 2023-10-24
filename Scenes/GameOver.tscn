@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvgcn7rqgv4dl"]
+[gd_scene load_steps=4 format=3 uid="uid://qrky4eupmavb"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_jdr4m"]
-[ext_resource type="PackedScene" uid="uid://dhkh1no4we5r1" path="res://Game.tscn" id="2_3y4ys"]
+[ext_resource type="FontFile" uid="uid://dr1dduygj571e" path="res://Gypsy Curse.ttf" id="3_3qxmy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tp2n0"]
-font_size = 32
+font = ExtResource("3_3qxmy")
+font_size = 200
 font_color = Color(1, 0, 0, 1)
 
 [node name="Control" type="Control"]
@@ -15,15 +16,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jdr4m")
-GamePath = ExtResource("2_3y4ys")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 95.0
+offset_left = -2.0
+offset_top = 44.0
+offset_right = -2.0
+offset_bottom = 231.0
 grow_horizontal = 2
-text = "Comsumed by the crushing influence of fast foot patrons..."
+text = "GAME OVER"
 label_settings = SubResource("LabelSettings_tp2n0")
 horizontal_alignment = 1
 vertical_alignment = 1

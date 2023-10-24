@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Order" load_steps=3 format=3 uid="uid://crjf6ipjovxmp"]
+
+[ext_resource type="Script" path="res://Orders/Order.cs" id="1_hnarn"]
+[ext_resource type="Texture2D" uid="uid://dd3unsne1t8vg" path="res://Sprites/Game/Lettuce.png" id="2_sw88b"]
+
+[resource]
+script = ExtResource("1_hnarn")
+ingredients = ["Lettuce"]
+textures = [ExtResource("2_sw88b")]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt0s5vr33md6o"]
+[gd_scene load_steps=6 format=3 uid="uid://bt0s5vr33md6o"]
 
 [ext_resource type="Texture2D" uid="uid://e3gmd6tx54hd" path="res://Sprites/Game/OrderTicket.png" id="1_5ivbl"]
 [ext_resource type="Script" path="res://Scripts/OrderTicket.cs" id="2_4q2ap"]
 [ext_resource type="Texture2D" uid="uid://cy4o3pwkb65q1" path="res://Sprites/Game/LambTemp.png" id="3_65t5c"]
+[ext_resource type="PackedScene" uid="uid://bwikikvfbvj4g" path="res://Scenes/warning_sign.tscn" id="4_21jvi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vk1ts"]
 size = Vector3(0.270055, 0.646575, 0.37445)
@@ -46,3 +47,7 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_vk1ts")
+
+[node name="WarningSign" parent="." instance=ExtResource("4_21jvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.141565, -0.283755, 0.045235)
+visible = false

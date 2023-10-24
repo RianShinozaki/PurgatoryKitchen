@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj32s13qfbn6i"]
+[gd_scene load_steps=3 format=3 uid="uid://cst18wt37gpvc"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_hdxmf"]
-[ext_resource type="PackedScene" uid="uid://dhkh1no4we5r1" path="res://Game.tscn" id="2_kbciu"]
+[ext_resource type="Texture2D" uid="uid://ci764lwwlondu" path="res://Scenes/DemonDiner.png" id="3_7lru4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,18 +11,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hdxmf")
-GamePath = ExtResource("2_kbciu")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 94.68
+offset_left = 314.0
+offset_top = 65.0
+offset_right = -287.0
+offset_bottom = 346.0
 grow_horizontal = 2
-text = "Insert Title Here
-(Change this node's type from label to texture rect)"
-horizontal_alignment = 1
-vertical_alignment = 2
+texture = ExtResource("3_7lru4")
+stretch_mode = 4
 
 [node name="Play" type="Button" parent="."]
 layout_mode = 1
@@ -32,9 +32,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -65.0
+offset_top = 27.0
 offset_right = 150.0
-offset_bottom = -15.0
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Play"
@@ -47,9 +47,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = 15.0
+offset_top = 107.0
 offset_right = 150.0
-offset_bottom = 65.0
+offset_bottom = 157.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"

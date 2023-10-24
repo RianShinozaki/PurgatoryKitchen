@@ -65,6 +65,7 @@ public partial class RealFridge : MeshInstance3D
 
 				}
 				open = !open;
+				GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 			}
 
 			if (ray.IsColliding() && open && !jumpscaring)

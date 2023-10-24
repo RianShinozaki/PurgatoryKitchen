@@ -6,6 +6,8 @@ public partial class GameManager : Node
     [Signal]
     public delegate void JumpscaredEventHandler();
 
+    public float Score;
+    public int ordersCompleted;
     public enum gameState
     {
         DEFAULT,
@@ -13,6 +15,9 @@ public partial class GameManager : Node
         FRIDGE,
         ORDERCOUNTER,
         SERVECOUNTER,
+        FRYER,
+        CUTTINGBOARD,
+        STORAGE,
         LOCKED
     }
 

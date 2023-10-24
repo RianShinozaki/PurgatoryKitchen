@@ -78,11 +78,22 @@ public partial class PickupCounter : Node
 		}
 	}
 
-	public void SuccessfulOrder()
+	public void SuccessfulOrder(float quality, Texture2D tex)
     {
 		gm.currentState = GameManager.gameState.LOCKED;
 		customer.Visible = true;
+		customer.Texture = tex;
 		orderGettingTime = 3;
 		gettingOrder = true;
+
+		if(quality < 0.3f)
+        {
+			Game game = (Game)GetParent().GetParent();
+			game.OnGameOver(tex);
+        } else
+        {
+			gm.ordersCompleted++;
+			gm.Score += Mathf.FloorToInt(quality * 10)*10;
+        }
 	}
 }

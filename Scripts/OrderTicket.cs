@@ -10,10 +10,15 @@ public partial class OrderTicket : Clickable
 	float shake = 0;
 	public RandomNumberGenerator randomGen = new RandomNumberGenerator();
 	PickupCounter pickupCounter;
+	public Texture2D customerSprite;
 
-	public void Define(Order order)
+	public float waitingTime;
+	public float totalWaitingTime = 2.5f * 60;
+
+	public void Define(Order order, Texture2D tex)
     {
 		myOrder = order;
+		customerSprite = tex;
 		for (int i = 0; i < 3; i++)
 		{
 			Sprite3D sprite = (Sprite3D)GetChild(i);
@@ -64,16 +69,23 @@ public partial class OrderTicket : Clickable
 			shake -= 0.01f;
 			Position += new Vector3(randomGen.RandfRange(-shake, shake), randomGen.RandfRange(-shake, shake), 0);
 		}
-		
-    }
+
+		waitingTime += (float)delta;
+		if (waitingTime > totalWaitingTime)
+		{
+			Game game = GetNode<Game>("/root/Game");
+			game.OnGameOver(customerSprite, 1);
+		}
+
+		GetNode<Warning>("WarningSign").warningLevel = waitingTime / totalWaitingTime;
+	}
 
     public override void OnClicked()
     {
         base.OnClicked();
 		if(thePlate.OrderID == OrderID)
         {
-			GD.Print("Correct order");
-			pickupCounter.SuccessfulOrder();
+			pickupCounter.SuccessfulOrder(thePlate.OrderQuality, customerSprite);
 			QueueFree();
 
         }

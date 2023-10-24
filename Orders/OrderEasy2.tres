@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Order" load_steps=3 format=3 uid="uid://csbsnu7igdglv"]
 
 [ext_resource type="Script" path="res://Orders/Order.cs" id="1_utvwp"]
-[ext_resource type="Texture2D" uid="uid://cy4o3pwkb65q1" path="res://Sprites/Game/LambTemp.png" id="2_iw03n"]
+[ext_resource type="Texture2D" uid="uid://iepjdvye7ne2" path="res://Sprites/Game/Steak.png" id="2_dcmsw"]
 
 [resource]
 script = ExtResource("1_utvwp")
-ingredients = ["Lamb", "Lamb"]
-textures = [ExtResource("2_iw03n"), ExtResource("2_iw03n")]
+ingredients = ["Beef"]
+textures = [ExtResource("2_dcmsw")]

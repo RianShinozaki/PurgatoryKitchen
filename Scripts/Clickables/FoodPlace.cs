@@ -21,15 +21,21 @@ public partial class FoodPlace : Clickable
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+		if (myFoodName != "")
+		{
+			Frame = Mathf.Clamp(Mathf.FloorToInt(cookLevel), 0, 6);
+		}
 	}
-
 	public override void OnClicked()
 	{
 		base.OnClicked();
 
 		if (myFoodName == "" && gm.heldFood.myName != "")
 		{
+			if(!FoodAllowed(gm.heldFood.myName))
+            {
+				return;
+            }
 			myFoodName = gm.heldFood.myName;
 			Texture = gm.heldFood.myTex;
 			cookLevel = gm.heldFood.cookLevel;
@@ -41,9 +47,15 @@ public partial class FoodPlace : Clickable
 			gm.AddNewFood(Texture, myFoodName, cookLevel);
 			myFoodName = "";
 			Texture = emptyTex;
+			cookLevel = 0;
 		}
 		else if (myFoodName != "" && gm.heldFood.myName != "")
 		{
+			if (!FoodAllowed(gm.heldFood.myName))
+			{
+				return;
+			}
+
 			string tempFoodName = gm.heldFood.myName;
 			Texture2D tempTex = gm.heldFood.myTex;
 			float tempCookLevel = gm.heldFood.cookLevel;
@@ -57,4 +69,9 @@ public partial class FoodPlace : Clickable
 		EmitSignal(SignalName.Changed);
 
 	}
+
+	public virtual bool FoodAllowed(string food)
+    {
+		return true;
+    }
 }

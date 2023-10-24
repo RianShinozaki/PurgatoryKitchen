@@ -93,6 +93,9 @@ public partial class Jumpscare : Sprite3D
 		};
 		label.Modulate = PhraseColor1;
 		label.RotationDegrees = Vector3.Left * 21f;
+		label.Font = (Font)GD.Load("res://Gypsy Curse.ttf");
+		label.OutlineModulate = new Color(0, 0, 0, 0);
+		label.TextureFilter = BaseMaterial3D.TextureFilterEnum.Nearest;
 
 		GetParent().GetParent().GetParent().AddChild(label);
 

@@ -13,6 +13,13 @@ public partial class RealOven : MeshInstance3D
 	Vector3 mouseOrigin;
 	Vector3 mouseRelativePos;
 
+	bool jumpscaring = false;
+	float jumpscaretime = 0;
+
+	[Export] PackedScene jumpscareMan;
+	[Export] Node jumpscareParent;
+	[Export] Sprite3D OvenScene;
+
 	public override void _Ready()
 	{
 		anim = GetNode<AnimationTree>("AnimationTree");
@@ -34,6 +41,7 @@ public partial class RealOven : MeshInstance3D
 			if (Input.IsActionJustPressed("Interact"))
 			{
 				open = !open;
+				GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 			}
 
 			if (ray.IsColliding() && open)
@@ -56,9 +64,24 @@ public partial class RealOven : MeshInstance3D
 			}
 		}
 
-		if (gm.currentState != GameManager.gameState.OVEN)
+		if (gm.currentState != GameManager.gameState.OVEN && gm.currentState != GameManager.gameState.LOCKED)
 		{
 			open = false;
+		}
+
+		if (jumpscaring && open)
+		{
+			gm.currentState = GameManager.gameState.LOCKED;
+			jumpscaretime += 1;
+			if (jumpscaretime >= 60)
+			{
+				Node jumpy = jumpscareMan.Instantiate();
+				jumpscareParent.AddChild(jumpy);
+				gm.currentState = GameManager.gameState.DEFAULT;
+				GetNode<Sprite3D>("BurnedMan").Visible = false;
+				OvenScene.Visible = false;
+				jumpscaring = false;
+			}
 		}
 
 		UpdateAnims();
@@ -78,4 +101,11 @@ public partial class RealOven : MeshInstance3D
 			mouseRelativePos += new Vector3(input.Relative.X, -input.Relative.Y, 0) * 0.005f;
 		}
 	}
+
+	public void SetJumpscare()
+    {
+		jumpscaring = true;
+		jumpscaretime = 0;
+		GetNode<Sprite3D>("BurnedMan").Visible = true;
+    }
 }

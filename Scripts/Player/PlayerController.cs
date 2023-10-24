@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerController : CharacterBody3D
 {
-	public const float Speed = 5.0f;
+	public const float Speed = 5.5f;
 	public const float JumpVelocity = 4.5f;
 
 	AnimationTree anim;

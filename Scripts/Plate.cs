@@ -4,6 +4,7 @@ using System;
 public partial class Plate : Sprite3D
 {
 	public int OrderID = 0;
+	public float OrderQuality;
 	public override void _Ready()
 	{
 		FoodPlace fp = (FoodPlace)GetChild(0);
@@ -25,8 +26,11 @@ public partial class Plate : Sprite3D
 	private void OnPlateChanged()
     {
 		OrderID = 0;
+		OrderQuality = 0;
+		int things = 3;
 		for(int i = 0; i < 3; i++)
         {
+			
 			FoodPlace fp = (FoodPlace)GetChild(i);
 			string theFood = fp.myFoodName;
 			switch(theFood)
@@ -49,9 +53,18 @@ public partial class Plate : Sprite3D
 				case "Octopus":
 					OrderID += 100000;
 					break;
+				default:
+					things--;
+					break;
 			}
+
+			OrderQuality += Mathf.Clamp((4 - Mathf.Abs(4 - fp.cookLevel)) / 4, 0, 1);
+
         }
-		GD.Print(OrderID);
+
+		OrderQuality /= things;
+
+		GD.Print(OrderQuality);
 	}
 	public void SweepOrder()
     {
